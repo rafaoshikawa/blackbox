@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
       potencia = "",
     } = card.dataset;
 
-    // proteção Safari / JSON inválido
     try {
       currentImages = JSON.parse(card.dataset.images || "[]");
     } catch (e) {
@@ -72,12 +71,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modalCilindrada) modalCilindrada.textContent = cilindrada || "-";
     if (modalPotencia) modalPotencia.textContent = potencia || "-";
 
+    // 🔥 ATIVA MODAL
     modal.classList.add("active");
-    document.body.classList.add("modal-open");
+
+    // 🔥 BLOQUEIO TOTAL DE SCROLL (inclui iOS)
+    document.body.classList.add("modal-open", "no-scroll");
+    document.documentElement.classList.add("no-scroll");
   }
 
   // =====================
-  // CLICK + TOUCH (FIX IPHONE)
+  // CLICK + TOUCH
   // =====================
   function handleCardClick(e) {
     const card = e.target.closest(".car-card");
@@ -95,7 +98,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // =====================
   function closeModal() {
     modal.classList.remove("active");
-    document.body.classList.remove("modal-open");
+
+    // 🔥 LIBERA SCROLL
+    document.body.classList.remove("modal-open", "no-scroll");
+    document.documentElement.classList.remove("no-scroll");
   }
 
   closeBtn?.addEventListener("click", closeModal);
