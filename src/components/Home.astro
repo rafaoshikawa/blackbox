@@ -3,120 +3,117 @@
 
 import Brands from "./Brands.astro";
 import ColecaoCards from "./colecaoCards.astro";
-
-
---- 
+---
 
 <section class="hero">
   <div class="container-hero mg-bottom container">
     <h1>
-      <span class="strong-title">Onde performance <br />
-      <span class="gradient-gold" style="line-height: 1.3;">encontra elegância</span>
+      <span class="strong-title"
+        >Onde performance <br />
+        <span class="gradient-gold" style="line-height: 1.3;"
+          >encontra elegância</span
+        >
+      </span>
+
+      <p class="text-1">Transforme cada viagem numa experiência única.</p>
     </h1>
 
-    <p class="text-1">Transforme cada viagem numa experiência única.</p>
+    <div class="container-btn">
+      <a class="btn-2" href="#">Pedir proposta</a>
+      <a
+        class="btn-3"
+        href="https://blackbox-carstudio.standvirtual.com/inventory"
+        target="_blank"
+        rel="noopener noreferrer">Ver viaturas</a
+      >
+    </div>
   </div>
 
-  <div class="container-btn">
-    <a class="btn-2" href="#">Pedir proposta</a>
-    <a
-      class="btn-3"
-      href="https://blackbox-carstudio.standvirtual.com/inventory"
-      target="_blank"
-      rel="noopener noreferrer">Ver viaturas</a
-    >
-  </div>
-</section>
+  <section class="products container">
+    <div class="container-hero container">
+      <p class="text-2">Nossas Viaturas<span class="dot">.</span></p>
+      <p class="text-1" id="colecao">
+        Conheça a nossa coleção de automóveis disponíveis para si
+      </p>
+    </div>
+    <div class="card-grid-home">
+      <ColecaoCards limit={6} />
+      <div>
+        <a class="btn-3" href="/colecao" rel="noopener noreferrer">Ver mais</a>
+      </div>
+    </div>
 
-<section class="products container">
-  <div class="container-hero container">
-    <p class="text-2">Nossas Viaturas<span class="dot">.</span></p>
-    <p class="text-1" id="colecao">
-      Conheça a nossa coleção de automóveis disponíveis para si
-    </p>
-  </div>
-  <div class="card-grid">
+    <div class="slider-dots"></div>
+  </section>
 
+  <Brands />
 
-  <a
-      class="btn-3"
-      href="/colecao"
-      rel="noopener noreferrer">Ver mais</a
-    >
-   
-  </div>
-  <ColecaoCards limit={6}/>
+  <section class="about bg-color" id="sobre">
+    <div class="container-about">
+      <div class="container-flex">
+        <div class="container-text">
+          <div class="card-container-text">
+            <div class="container-header-text">
+              <h2 class="text-h2">BlackBox</h2>
+              <p class="text-3">A nossa Historia</p>
+            </div>
 
-  <div class="slider-dots"></div>
-</section>
+            <p class="text-p">
+              Somos uma concessionária especializada na venda de veículos de
+              qualidade, oferecendo opções que vão desde modelos citadinos até
+              automóveis familiares e desportivos. O nosso objetivo é garantir
+              que cada cliente encontre o carro ideal com confiança, segurança e
+              total transparência.
+            </p>
+            <p class="text-p">
+              Trabalhamos com foco na excelência do atendimento e na satisfação
+              do cliente em todas as etapas do processo. Desde a escolha do
+              veículo até à entrega, proporcionamos uma experiência simples,
+              profissional e adaptada às necessidades de cada pessoa.
+            </p>
+          </div>
+        </div>
 
-
-<Brands />
-
-<section class="about bg-color" id="sobre">
-  <div class="container-about">
-    <div class="container-flex">
-      <div class="container-text">
-        <div class="card-container-text">
-          <div class="container-header-text">
-            <h2 class="text-h2">BlackBox</h2>
-            <p class="text-3">A nossa Historia</p>
+        <div class="container-baloons">
+          <div class="services-baloon">
+            <img src="/images/award.svg" alt="Selo de qualidade" />
+            <h4>Veículos de qualidade</h4>
+            <p>
+              Trabalhamos apenas com veículos inspecionados, garantindo
+              qualidade, segurança e excelente estado de conservação para cada
+              cliente.
+            </p>
           </div>
 
-          <p class="text-p">
-            Somos uma concessionária especializada na venda de veículos de
-            qualidade, oferecendo opções que vão desde modelos citadinos até
-            automóveis familiares e desportivos. O nosso objetivo é garantir que
-            cada cliente encontre o carro ideal com confiança, segurança e total
-            transparência.
-          </p>
-          <p class="text-p">
-            Trabalhamos com foco na excelência do atendimento e na satisfação do
-            cliente em todas as etapas do processo. Desde a escolha do veículo
-            até à entrega, proporcionamos uma experiência simples, profissional
-            e adaptada às necessidades de cada pessoa.
-          </p>
-        </div>
-      </div>
+          <div class="services-baloon">
+            <img src="/images/users.svg" alt="Atendimento personalizado" />
+            <h4>Atendimento Personalizado</h4>
+            <p>
+              Ajudamos você em todo o processo de escolha do carro ideal, com
+              atendimento próximo, rápido e focado nas suas necessidades.
+            </p>
+          </div>
 
-      <div class="container-baloons">
-        <div class="services-baloon">
-          <img src="/images/award.svg" alt="Selo de qualidade" />
-          <h4>Veículos de qualidade</h4>
-          <p>
-            Trabalhamos apenas com veículos inspecionados, garantindo qualidade,
-            segurança e excelente estado de conservação para cada cliente.
-          </p>
-        </div>
+          <div class="services-baloon">
+            <img src="/images/clock.svg" alt="Entrega no prazo" />
+            <h4>Entrega Segura e Rápida</h4>
+            <p>
+              Garantimos uma compra simples e transparente, com toda a
+              documentação tratada de forma rápida para você receber o seu
+              veículo sem complicações.
+            </p>
+          </div>
 
-        <div class="services-baloon">
-          <img src="/images/users.svg" alt="Atendimento personalizado" />
-          <h4>Atendimento Personalizado</h4>
-          <p>
-            Ajudamos você em todo o processo de escolha do carro ideal, com
-            atendimento próximo, rápido e focado nas suas necessidades.
-          </p>
-        </div>
-
-        <div class="services-baloon">
-          <img src="/images/clock.svg" alt="Entrega no prazo" />
-          <h4>Entrega Segura e Rápida</h4>
-          <p>
-            Garantimos uma compra simples e transparente, com toda a
-            documentação tratada de forma rápida para você receber o seu veículo
-            sem complicações.
-          </p>
-        </div>
-
-        <div class="services-baloon">
-          <img src="/images/palette.svg" alt="Design exclusivo" />
-          <h4>Variedade de modelos</h4>
-          <p>
-            Desde carros citadinos económicos até SUVs e desportivos, temos
-            opções para todos os estilos de condução e orçamento.
-          </p>
+          <div class="services-baloon">
+            <img src="/images/palette.svg" alt="Design exclusivo" />
+            <h4>Variedade de modelos</h4>
+            <p>
+              Desde carros citadinos económicos até SUVs e desportivos, temos
+              opções para todos os estilos de condução e orçamento.
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </section>

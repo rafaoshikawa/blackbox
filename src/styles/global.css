@@ -197,6 +197,7 @@ li {
   display: flex;
   align-items: center;
   gap: 10px;
+  max-width: fit-content;
 
   background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
 
