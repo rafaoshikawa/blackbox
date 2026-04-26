@@ -42,3 +42,19 @@ function initializeMenu() {
 }
 
 document.addEventListener("DOMContentLoaded", initializeMenu);
+
+// =====================
+// 🔥 PRELOADER FIX
+// =====================
+window.addEventListener("load", () => {
+  const preloader = document.getElementById("preloader");
+
+  if (!preloader) return;
+
+  preloader.classList.add("hidden");
+
+  // remove depois da animação (opcional mas recomendado)
+  setTimeout(() => {
+    preloader.remove();
+  }, 500);
+});
