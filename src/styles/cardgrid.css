@@ -30,7 +30,6 @@
     scroll-snap-type: x mandatory; /* scroll suave */
     gap: 20px; /* gap menor para mobile */
     margin: 0; /* remove margens que causam overflow */
-    padding: 10px 0 10px 0px; /* respiro interno */
     width: 100%; /* ocupa toda largura do container */
     min-width: 100%; /* evita que encolha no Safari */
     box-sizing: border-box; /* padding incluso na largura */
