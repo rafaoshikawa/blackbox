@@ -1,72 +1,60 @@
-function initializeSmoothScroll() {
-  const header = document.querySelector(".header");
+// =====================
+// MENU MOBILE (BURGER)
+// =====================
+function initializeMenu() {
+  const menuIcon = document.querySelector("#menu-icon");
+  const navbar = document.querySelector(".navbar");
+  const navBg = document.querySelector(".nav-bg");
+  const navLinks = document.querySelectorAll(".navbar a");
 
-  function getHeaderHeight() {
-    return header ? header.offsetHeight : 0;
-  }
+  if (!menuIcon || !navbar) return;
 
-  function scrollToHash(hash) {
-    const target = document.querySelector(hash);
-    if (!target) return;
+  // === Abrir / fechar menu ===
+  menuIcon.addEventListener("click", (e) => {
+    e.stopPropagation();
 
-    const top =
-      target.getBoundingClientRect().top + window.scrollY - getHeaderHeight();
+    const opened = navbar.classList.toggle("active");
+    menuIcon.classList.toggle("bx-x", opened);
+    navBg?.classList.toggle("active", opened);
 
-    window.scrollTo({
-      top,
-      behavior: "smooth",
+    document.body.classList.toggle("no-scroll", opened);
+  });
+
+  // === Fechar ao clicar em link ===
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (window.innerWidth <= 768) {
+        closeMobileMenu();
+      }
     });
-  }
+  });
 
+  // === Fechar ao clicar fora ===
+  document.addEventListener("click", (e) => {
+    if (window.innerWidth <= 768 && !e.target.closest(".header")) {
+      closeMobileMenu();
+    }
+  });
+
+  // === Fechar ao voltar para desktop ===
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+      closeMobileMenu();
+    }
+  });
+
+  // === Função de fechar ===
   function closeMobileMenu() {
-    const navbar = document.querySelector(".navbar");
-    const menuIcon = document.querySelector("#menu-icon");
-    const navBg = document.querySelector(".nav-bg");
-
-    navbar?.classList.remove("active");
-    menuIcon?.classList.remove("bx-x");
+    navbar.classList.remove("active");
+    menuIcon.classList.remove("bx-x");
     navBg?.classList.remove("active");
     document.body.classList.remove("no-scroll");
   }
-
-  // 🔥 EVENT DELEGATION GLOBAL (FIX PRINCIPAL)
-  document.addEventListener("click", (e) => {
-    const link = e.target.closest("a");
-    if (!link) return;
-
-    const href = link.getAttribute("href");
-    if (!href) return;
-
-    closeMobileMenu();
-
-    // links normais (ex: /colecao)
-    if (!href.includes("#")) return;
-
-    const [path, hash] = href.split("#");
-
-    if (!hash) return;
-
-    const targetHash = `#${hash}`;
-
-    // se for outra página, deixa navegar normal
-    if (path && path !== "/" && path !== window.location.pathname) {
-      return;
-    }
-
-    e.preventDefault();
-
-    scrollToHash(targetHash);
-  });
-
-  function handleInitialHash() {
-    const hash = window.location.hash;
-    if (!hash) return;
-
-    setTimeout(() => {
-      scrollToHash(hash);
-    }, 80);
-  }
-
-  window.addEventListener("DOMContentLoaded", handleInitialHash);
-  window.addEventListener("pageshow", handleInitialHash);
 }
+
+// =====================
+// INIT
+// =====================
+document.addEventListener("DOMContentLoaded", () => {
+  initializeMenu();
+});
