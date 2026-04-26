@@ -1,0 +1,46 @@
+---
+import HeadBase from "../components/HeadBase.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import WhatsAppButton from "../components/WhatsAppButton.astro";
+
+import CarList from "../components/CarList.astro";
+import CarModal from "../components/CarModal.astro";
+
+import "../styles/global.css";
+import "../styles/header.css";
+import "../styles/footer.css";
+import "../styles/cardgrid.css";
+import "../styles/carCard.css";
+import "../styles/brands.css";
+import "../styles/colecao.css";
+---
+
+<html lang="pt-BR">
+  <HeadBase />
+
+  <body>
+    <Header />
+    <WhatsAppButton />
+    <br />
+    <br />
+    <br />
+
+    <!-- LISTA DE CARROS -->
+    <section class="container" style="margin-top: 80px;">
+      <div class="colecao-tittle">
+        <h2 class="gradient-gold text-2">Encontre a Sua Viatura Ideal</h2>
+        <h2 class="text-1 ">Conheça a nossa coleção de automóveis disponíveis para si</h1>
+      </div>
+      <CarList />
+    </section>
+
+    <!-- MODAL GLOBAL (reutilizável em qualquer página) -->
+    <CarModal />
+
+    <Footer />
+
+    <!-- JS GLOBAL DO MODAL -->
+    <script type="module" src="/src/js/carModal.js"></script>
+  </body>
+</html>

@@ -1,0 +1,152 @@
+/* ===============================
+   BASE GERAL
+=============================== */
+
+
+/* ===============================
+   SECTION QUALIDADE + PRAZO
+=============================== */
+.qualidade-section {
+  background: linear-gradient(135deg, #2b2b2b 0%, #111111 100%);
+  color: #fff;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  width: 100%;
+}
+
+.qualidade-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.qualidade-container-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: nowrap;
+}
+
+.qualidade-title {
+  font-size: 2.4rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.qualidade-title span {
+  display: inline-block;
+}
+
+.qualidade-title .icon {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  transform: translateY(3px);
+  flex-shrink: 0;
+}
+
+.qualidade-desc {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 150px;
+  color: #cfcfcf;
+  font-weight: 100;
+}
+
+/* ===============================
+   BRANDS WRAPPER (EXPANDE FORA DO CONTAINER)
+=============================== */
+.brands-wrapper {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 0 40px; /* respiro lateral */
+  box-sizing: border-box;
+}
+
+/* ===============================
+   BRANDS GRID
+=============================== */
+.brands-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+  align-items: center;
+  justify-items: center;
+  margin-top: 2.5rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+/* SVGs das marcas */
+.brands-container svg {
+  width: 160px;
+  height: 100px;
+  max-width: 100%;
+  object-fit: contain;
+  fill: #919090;
+  opacity: 0.85;
+  transition: 0.3s ease;
+}
+
+/* Hover premium */
+.brands-container svg:hover {
+  fill: #d4af37;
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+/* ===============================
+   RESPONSIVO
+=============================== */
+@media (max-width: 1100px) {
+  .brands-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .brands-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .brands-wrapper {
+    padding: 0 20px;
+  }
+
+  .brands-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .brands-container svg {
+    width: 90px;
+    height: 60px;
+  }
+
+  .qualidade-title {
+    font-size: 1.2rem;
+    gap: 0.6rem;
+  }
+
+  .qualidade-title .icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .qualidade-desc {
+    font-size: 0.85rem;
+  }
+}

@@ -1,0 +1,60 @@
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  max-width: 2400px;
+}
+
+/* --- MOBILE (menor que 768px) --- */
+@media (max-width: 768px) {
+  /* Faz o .card-grid ignorar o container */
+  .products.container {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 100%;
+    overflow-x: hidden; /* evita scroll horizontal global */
+  }
+
+  .card-grid {
+    display: flex;
+    flex-wrap: nowrap; /* impede quebra de linha */
+    overflow-x: scroll; /* scroll horizontal forçado para Safari */
+    -webkit-overflow-scrolling: touch; /* smooth scroll iOS */
+    scroll-snap-type: x mandatory; /* scroll suave */
+    gap: 20px; /* gap menor para mobile */
+    margin: 0; /* remove margens que causam overflow */
+    padding: 10px 0 10px 10px; /* respiro interno */
+    width: 100%; /* ocupa toda largura do container */
+    min-width: 100%; /* evita que encolha no Safari */
+    box-sizing: border-box; /* padding incluso na largura */
+    justify-content: flex-start; /* cards começam da esquerda */
+  }
+
+  /* Scrollbar personalizada (funciona no Chrome/Android, Safari mostra scroll invisível) */
+  .card-grid::-webkit-scrollbar {
+    height: 12px;
+  }
+
+  .card-grid::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+  }
+
+  .card-grid::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  .card {
+    flex: 0 0 80%; /* cada card ocupa ~80% da tela */
+    max-width: 300px;
+    scroll-snap-align: start; /* trava card ao parar o scroll */
+  }
+}
+
+

@@ -1,0 +1,65 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  /* 🔥 imagem de fundo estável */
+  background-image: url("/images/cars/homewallpaper.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* overlay escuro para dar contraste */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.175);
+  z-index: -1;
+}
+
+
+
+.container-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.container-hero h1 {
+  font-size: 4rem;
+  max-width: 30ch;
+  text-align: center;
+  padding-top: 80px;
+
+  background: linear-gradient(to right, #c4c3c3 0%, #ffffff 55%, #c4c3c3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* botão */
+.container-btn {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 70px;
+  position: relative;
+  z-index: 1;
+}
+
+/* responsivo */
+@media (max-width: 768px) {
+  .container-hero h1 {
+    font-size: 2.5rem;
+  }
+}

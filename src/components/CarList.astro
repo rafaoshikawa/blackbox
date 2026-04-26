@@ -1,0 +1,15 @@
+---
+import cars from "../data/cars.json";
+import CarCard from "./CarCard.astro";
+
+const { limit } = Astro.props;
+
+// se tiver limite, corta o array
+const carsToShow = limit ? cars.slice(0, limit) : cars;
+---
+
+<div class="card-grid">
+  {carsToShow.map((car) => (
+    <CarCard car={car} />
+  ))}
+</div>

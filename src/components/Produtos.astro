@@ -1,0 +1,59 @@
+---
+import ProdutoCard from './ProdutoCard.astro';
+const { tituloSecao, subtitulo, categorias } = Astro.props;
+import '../styles/store.css';
+---
+
+<section class="produtos-page">
+  <section class="produtos-section">
+    <div class="container">
+      <div class="mini-navbar">
+        <a href="/">Home ></a>
+        <a href="#">{tituloSecao}</a>
+      </div>
+
+      <h2 class="text-tittle-store">{tituloSecao}<span class="dot">.</span></h2>
+      <p class="section-subtitle">{subtitulo}</p>
+
+      {categorias.map((categoria: { id: string | null | undefined; cor: any; nomeCategoria: unknown; produtos: any[]; descricao: unknown; beneficios: any[]; }) => (
+        <div class="card-grid-wrapper" id={categoria.id}>
+                  <span 
+            class="section-tag" 
+            id={categoria.id} 
+            style={`background-color: ${categoria.cor};`}
+          >
+            {categoria.nomeCategoria}
+          </span>
+
+          <div class="card-grid">
+            {categoria.produtos.map((produto: { titulo: unknown; descricao: unknown; imagem: unknown; linkCTA: unknown; }) => (
+              <ProdutoCard
+                titulo={produto.titulo}
+                descricao={produto.descricao}
+                imagem={produto.imagem}
+                linkCTA={produto.linkCTA}
+              />
+            ))}
+          </div>
+
+          <div class="grid-desc">
+            <div class="desc-left">
+              <p>{categoria.descricao}</p>
+            </div>
+            <div class="desc-right">
+              <ul>
+                {categoria.beneficios.map((beneficio: unknown) => (
+                  <li>
+                    <img src="/images/check-green.svg" />
+                    {beneficio}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      ))}
+
+    </div>
+  </section>
+</section>

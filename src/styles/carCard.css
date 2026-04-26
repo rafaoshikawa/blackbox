@@ -1,0 +1,309 @@
+.car-card {
+  width: 320px;
+  background: #111;
+  color: white;
+  border-radius: 20px;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+
+  padding: 16px;
+
+  border: 2px solid rgba(95, 95, 95, 0.6);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+  transition: all 0.35s ease;
+  position: relative;
+
+  /* 👇 ADICIONA ISSO */
+  display: flex;
+  flex-direction: column;
+}
+
+/* HOVER: crescimento + glow */
+.car-card:hover {
+  transform: scale(1.06);
+  cursor: pointer;
+
+  /* 🔥 borda some */
+  border-color: transparent;
+
+  box-shadow:
+    0 0 12px rgba(253, 185, 36, 0.25),
+    0 0 30px rgba(253, 185, 36, 0.15),
+    0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* LED border animada */
+.car-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 3px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(253, 185, 36, 0.85),
+    transparent
+  );
+
+  background-size: 200% 200%;
+  animation: ledMove 3s linear infinite;
+
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  pointer-events: none;
+}
+
+/* ativa LED no hover */
+.car-card:hover::before {
+  opacity: 1;
+}
+
+/* animação LED */
+@keyframes ledMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+/* imagem */
+.car-image img {
+  border-radius: 20px;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+/* info */
+.car-info {
+  padding: 16px 0px;
+
+  /* 👇 ISSO AQUI É O SEGREDO */
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* ocupa o espaço disponível */
+}
+
+.car-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: #bbb;
+  margin-bottom: 12px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.meta-item svg {
+  width: 16px;
+  height: 16px;
+  stroke: #bbb;
+  fill: none;
+}
+
+.brand {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.model {
+  font-size: 14px;
+  color: #aaa;
+  margin: 4px 0 12px;
+}
+
+.price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: auto; /* 👈 ISSO FIXA EMBAIXO */
+}
+
+.price span {
+  font-size: 1.3rem;
+  color: #aaa;
+}
+
+.price strong {
+  font-size: 20px;
+  font-size: 2rem;
+  color: #ffd400;
+}
+
+@media (max-width: 768px) {
+  /* container vira carrossel horizontal */
+  .card-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+
+    padding: 10px 0 10px 10px;
+    margin: 0;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    justify-content: flex-start;
+  }
+
+  /* cada card mantém TAMANHO original (não mexe no teu 320px) */
+  .car-card {
+    flex: 0 0 auto; /* impede encolher */
+    scroll-snap-align: start;
+  }
+
+  /* opcional: esconder scrollbar */
+  .card-grid::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .card-grid::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+  }
+}
+
+.meta-item svg {
+  width: 16px;
+  height: 16px;
+  stroke: #bbb; /* branco */
+  fill: #bbb; /* branco */
+}
+
+/* =========================
+   MODAL
+========================= */
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: #111;
+  border-radius: 20px;
+  padding: 40px;
+  width: 95%;
+  max-width: 900px; /* 🔥 maior */
+  max-height: 90vh; /* evita estourar tela */
+  overflow-y: auto; /* permite scroll interno */
+  position: relative;
+  color: white;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* botão fechar */
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 26px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* carrossel */
+.modal-carousel {
+  position: relative;
+}
+
+.modal-carousel img {
+  width: 100%;
+  height: auto; /* 🔥 mantém proporção real */
+  max-height: 400px; /* limita altura */
+  object-fit: cover;
+  border-radius: 15px;
+  display: block;
+}
+
+/* setas */
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: white;
+  font-size: 22px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.prev {
+  left: 10px;
+}
+.next {
+  right: 10px;
+}
+
+/* infos */
+.modal-info {
+  margin-top: 15px;
+}
+
+.modal-meta {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  color: #bbb;
+  margin-bottom: 10px;
+}
+
+.modal-price strong {
+  color: #ffd400;
+  font-size: 22px;
+}
+
+.modal-button {
+  display: flex;
+  justify-content: center;
+}

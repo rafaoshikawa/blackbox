@@ -1,0 +1,32 @@
+---
+import CarList from "../components/CarList.astro";
+import CarModal from "../components/CarModal.astro";
+
+const { limit } = Astro.props;
+
+import "../styles/global.css";
+import "../styles/header.css";
+import "../styles/footer.css";
+import "../styles/cardgrid.css";
+import "../styles/carCard.css";
+import "../styles/brands.css";
+---
+
+<html lang="pt-BR">
+  <body>
+    <br />
+    <br />
+    <br />
+
+    <!-- LISTA DE CARROS -->
+    <section class="container" style="margin-top: 80px;">
+      <CarList limit={limit} />
+    </section>
+
+    <!-- MODAL GLOBAL (reutilizável em qualquer página) -->
+    <CarModal />
+
+    <!-- JS GLOBAL DO MODAL -->
+    <script type="module" src="/src/js/carModal.js"></script>
+  </body>
+</html>

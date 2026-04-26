@@ -1,0 +1,13 @@
+---
+const { titulo, descricao, imagem, linkCTA } = Astro.props;
+import "../styles/produtoCard.css";
+---
+
+<div class="card2">
+  <div class="card-image">
+    <img src={imagem} alt={titulo} />
+  </div>
+  <div class="card-info">
+    <a href={linkCTA} class="btn-card">Pedir Orçamento</a>
+  </div>
+</div>

@@ -1,0 +1,439 @@
+[
+  {
+    "image": "/images/cars/bmw/m3dkg/bmwdkg.jpg",
+    "images": [
+      "/images/cars/bmw/m3dkg/bmwdkg.jpg",
+      "/images/cars/bmw/m3dkg/bmwdkg2.jpg",
+      "/images/cars/bmw/m3dkg/bmwdkg3.jpg",
+      "/images/cars/bmw/m3dkg/bmwdkg4.jpg",
+      "/images/cars/bmw/m3dkg/bmwdkg5.jpg",
+      "/images/cars/bmw/m3dkg/bmwdkg6.jpg"
+
+
+    ],
+    "brand": "BMW M3 DKG",
+    "model": "BMW M3 3.0 DKG 431cv",
+    "year": "Jun. 2016",
+    "fuel": "Gasolina",
+    "km": "155 406 km",
+    "price": "59 900 €",
+    "caixa": "Automática",
+    "segmento": "Sedan",
+    "cilindrada": "2979 cm³",
+    "potencia": "431 cv"
+  },
+  
+  {
+    "image": "/images/cars/mercedez/b180cdi/mercedez.jpg",
+    "images": [
+      "/images/cars/mercedez/b180cdi/mercedez.jpg",
+      "/images/cars/mercedez/b180cdi/mercedez2.jpg",
+      "/images/cars/mercedez/b180cdi/mercedez3.jpg",
+      "/images/cars/mercedez/b180cdi/mercedez4.jpg",
+      "/images/cars/mercedez/b180cdi/mercedez5.jpg",
+      "/images/cars/mercedez/b180cdi/mercedez6.jpg"
+
+
+    ],
+    "brand": "Mercedez-Benz B 180 ",
+    "model": "Mercedes-Benz B-180 CDI BlueEfficiency 7G-DCT 109cv",
+    "year": "Jan. 2013",
+    "fuel": "Diesel",
+    "km": "242 101 km",
+    "price": "13 500 €",
+    "caixa": "Automática",
+    "segmento": "Citadino",
+    "cilindrada": "1 796 cm³",
+    "potencia": "109 cv"
+  },
+    {
+    "image": "/images/cars/minicooper/minicooperd.jpg",
+    "images": [
+      "/images/cars/minicooper/minicooperd.jpg",
+      "/images/cars/minicooper/minicooperd2.jpg",
+      "/images/cars/minicooper/minicooperd3.jpg",
+      "/images/cars/minicooper/minicooperd4.jpg",
+      "/images/cars/minicooper/minicooperd5.jpg",
+      "/images/cars/minicooper/minicooperd6.jpg"
+
+
+    ],
+    "brand": "Mini Clubman Cooper D",
+    "model": "MINI Clubman Cooper D 1.6 110cv",
+    "year": "Out. 2009",
+    "fuel": "Diesel",
+    "km": "187 245 km",
+    "price": "8 990 €",
+    "caixa": "Manual",
+    "segmento": "Carrinha",
+    "cilindrada": "1 560 cm³",
+    "potencia": "110 cv"
+  },
+      {
+    "image": "/images/cars/audi/A1/audia1.jpg",
+    "images": [
+      "/images/cars/audi/A1/audia1.jpg",
+      "/images/cars/audi/A1/audia1-2.jpg",
+      "/images/cars/audi/A1/audia1-3.jpg",
+      "/images/cars/audi/A1/audia1-4.jpg",
+      "/images/cars/audi/A1/audia1-5.jpg",
+      "/images/cars/audi/A1/audia1-6.jpg"
+
+
+    ],
+    "brand": "Audi A1 TDI 1.6",
+    "model": "Audi A1 1.6 TDI S line Sport Pack 105cv ",
+    "year": "Abr. 2012",
+    "fuel": "Diesel",
+    "km": "157 476 km",
+    "price": "10 500 €",
+    "caixa": "Manual",
+    "segmento": "Citadino",
+    "cilindrada": "1 598 cm³",
+    "potencia": "105 cv"
+  },
+        {
+    "image": "/images/cars/citroen/c3/citroenc3-1.jpg",
+    "images": [
+      "/images/cars/citroen/c3/citroenc3-1.jpg",
+      "/images/cars/citroen/c3/citroenc3-2.jpg",
+      "/images/cars/citroen/c3/citroenc3-3.jpg",
+      "/images/cars/citroen/c3/citroenc3-4.jpg",
+      "/images/cars/citroen/c3/citroenc3-5.jpg",
+      "/images/cars/citroen/c3/citroenc3-6.jpg"
+
+
+    ],
+    "brand": "Citroën C3 Exclusive 1.6",
+    "model": "Citroën C3 ver-1.6 e-HDi Exclusive 92cv ",
+    "year": "Jun. 2017",
+    "fuel": "Diesel",
+    "km": "188 062 km",
+    "price": "10 750 €",
+    "caixa": "Manual",
+    "segmento": "Citadino",
+    "cilindrada": "1 560 cm³",
+    "potencia": "92 cv"
+  },
+        {
+    "image": "/images/cars/bmw/x1-18d-sdrive/bmwx1-1.jpg",
+    "images": [
+      "/images/cars/bmw/x1-18d-sdrive/bmwx1-1.jpg",
+      "/images/cars/bmw/x1-18d-sdrive/bmwx1-2.jpg",
+      "/images/cars/bmw/x1-18d-sdrive/bmwx1-3.jpg",
+      "/images/cars/bmw/x1-18d-sdrive/bmwx1-4.jpg",
+      "/images/cars/bmw/x1-18d-sdrive/bmwx1-5.jpg",
+      "/images/cars/bmw/x1-18d-sdrive/bmwx1-6.jpg"
+
+
+    ],
+    "brand": "BMW X1 sDrive18d",
+    "model": "BMW X1 sDrive18d 2.0 143cv",
+    "year": "Jun. 2011",
+    "fuel": "Diesel",
+    "km": "334 527 km",
+    "price": "9 990 €",
+    "caixa": "Manual",
+    "segmento": "SUV/TT",
+    "cilindrada": "1 995 cm³",
+    "potencia": "143 cv"
+  },
+          {
+    "image": "/images/cars/bmw/320dline/bmw320dline-1.jpg",
+    "images": [
+
+       "/images/cars/bmw/320dline/bmw320dline-1.jpg",
+      "/images/cars/bmw/320dline/bmw320dline-2.jpg",
+      "/images/cars/bmw/320dline/bmw320dline-3.jpg",
+      "/images/cars/bmw/320dline/bmw320dline-4.jpg",
+      "/images/cars/bmw/320dline/bmw320dline-5.jpg",
+      "/images/cars/bmw/320dline/bmw320dline-6.jpg"
+
+
+    ],
+    "brand": "BMW 320 d Line Modern",
+    "model": "BMW 320d ver-d-line Modern",
+    "year": "Set. 2011",
+    "fuel": "Diesel",
+    "km": "296 551 km",
+    "price": "11 800 €",
+    "caixa": "Manual",
+    "segmento": "Carrinha",
+    "cilindrada": "1 995 cm³",
+    "potencia": "184 cv"
+  },
+         {
+    "image": "/images/cars/volkswagen/golf/dsg/golfdsg-1.jpg",
+    "images": [
+      "/images/cars/volkswagen/golf/dsg/golfdsg-1.jpg",
+      "/images/cars/volkswagen/golf/dsg/golfdsg-2.jpg",
+      "/images/cars/volkswagen/golf/dsg/golfdsg-3.jpg",
+      "/images/cars/volkswagen/golf/dsg/golfdsg-4.jpg",
+      "/images/cars/volkswagen/golf/dsg/golfdsg-5.jpg",
+      "/images/cars/volkswagen/golf/dsg/golfdsg-6.jpg"
+
+
+    ],
+    "brand": "VW Golf 2.0 R DSG",
+    "model": "VW Golf 2.0 R DSG 270cv",
+    "year": "Mai. 2010",
+    "price": "19 500 €",
+    "km": "191 176 km",
+    "fuel": "Gasolina",
+    "caixa": "Automática",
+    "segmento": "Utilitário",
+    "cilindrada": "1 984 cm³",
+    "potencia": "270 cv"
+  },
+           {
+    "image": "/images/cars/bmw/x1-16d-sdrive/x1-16d-sdrive-1.jpg",
+    "images": [
+      "/images/cars/bmw/x1-16d-sdrive/x1-16d-sdrive-1.jpg",
+      "/images/cars/bmw/x1-16d-sdrive/x1-16d-sdrive-2.jpg",
+      "/images/cars/bmw/x1-16d-sdrive/x1-16d-sdrive-3.jpg",
+      "/images/cars/bmw/x1-16d-sdrive/x1-16d-sdrive-4.jpg",
+      "/images/cars/bmw/x1-16d-sdrive/x1-16d-sdrive-5.jpg",
+      "/images/cars/bmw/x1-16d-sdrive/x1-16d-sdrive-6.jpg"
+
+
+    ],
+    "brand": "BMW X1 16 d sDrive",
+    "model": "BMW X1 1.5d sDrive Pack M Auto",
+    "year": "Set. 2019",
+    "price": "22 990 €",
+    "km": "119 117 km",
+    "fuel": "Diesel",
+    "caixa": "Automática",
+    "segmento": "SUV/TT",
+    "cilindrada": "1 496 cm³",
+    "potencia": "116 cv"
+  },
+            {
+    "image": "/images/cars/peugeot/208/peugeot208-1.jpg",
+    "images": [
+      "/images/cars/peugeot/208/peugeot208-1.jpg",
+      "/images/cars/peugeot/208/peugeot208-2.jpg",
+      "/images/cars/peugeot/208/peugeot208-3.jpg",
+      "/images/cars/peugeot/208/peugeot208-4.jpg",
+      "/images/cars/peugeot/208/peugeot208-5.jpg",
+      "/images/cars/peugeot/208/peugeot208-6.jpg"
+
+
+    ],
+    "brand": "Peugeot 208 Style",
+    "year": "Ago. 2016",
+    "price": "7 500 €",
+    "km": "125 000",
+    "fuel": "Gasolina",
+    "caixa": "Manual",
+    "segmento": "Citadino",
+    "cilindrada": "1 199 cm³",
+    "potencia": "82 cv",
+    "model": "Peugeot 208 1.2 PureTech 82cv Style "
+
+    
+  }
+  ,
+            {
+    "image": "/images/cars/volkswagen/polo/gti/pologti-1.jpg",
+    "images": [
+      "/images/cars/volkswagen/polo/gti/pologti-1.jpg",
+      "/images/cars/volkswagen/polo/gti/pologti-2.jpg",
+      "/images/cars/volkswagen/polo/gti/pologti-3.jpg",
+      "/images/cars/volkswagen/polo/gti/pologti-4.jpg",
+      "/images/cars/volkswagen/polo/gti/pologti-5.jpg",
+      "/images/cars/volkswagen/polo/gti/pologti-6.jpg"
+
+
+    ],
+    "brand": "VW Polo 1.4 GTi",
+    "year": "Set. 2000",
+    "price": "4 750 €",
+    "km": "234 680",
+    "fuel": "Gasolina",
+    "caixa": "Manual",
+    "segmento": "Pequeno Citadino",
+    "cilindrada": "1 390 cm³",
+    "potencia": "100 cv",
+    "model": "VW Polo 1.6 GTI 100cv "
+
+    
+  },
+           {
+    "image": "/images/cars/bmw/118d/bmw118d-1.jpg",
+    "images": [
+      "/images/cars/bmw/118d/bmw118d-1.jpg",
+      "/images/cars/bmw/118d/bmw118d-2.jpg",
+      "/images/cars/bmw/118d/bmw118d-3.jpg",
+      "/images/cars/bmw/118d/bmw118d-4.jpg",
+      "/images/cars/bmw/118d/bmw118d-5.jpg",
+      "/images/cars/bmw/118d/bmw118d-6.jpg"
+
+
+    ],
+    "brand": "BMW 118d",
+    "year": "-",
+    "price": "- €",
+    "km": "-",
+    "fuel": "-",
+    "caixa": "-",
+    "segmento": "-",
+    "cilindrada": "-",
+    "potencia": "-",
+    "model": "- "
+
+    
+  },
+           {
+    "image": "/images/cars/bmw/x5-40e/bmwx540e-1.jpg",
+    "images": [
+      "/images/cars/bmw/x5-40e/bmwx540e-1.jpg",
+      "/images/cars/bmw/x5-40e/bmwx540e-2.jpg",
+      "/images/cars/bmw/x5-40e/bmwx540e-3.jpg",
+      "/images/cars/bmw/x5-40e/bmwx540e-4.jpg",
+      "/images/cars/bmw/x5-40e/bmwx540e-5.jpg",
+      "/images/cars/bmw/x5-40e/bmwx540e-6.jpg"
+
+
+    ],
+    "brand": "BMW x5 40e",
+    "year": "-",
+    "price": "- €",
+    "km": "-",
+    "fuel": "-",
+    "caixa": "-",
+    "segmento": "-",
+    "cilindrada": "-",
+    "potencia": "-",
+    "model": "- "
+
+    
+  },
+           {
+    "image": "/images/cars/audi/a5-sportback/audia5sportback-1.jpg",
+    "images": [
+      "/images/cars/audi/a5-sportback/audia5sportback-1.jpg",
+      "/images/cars/audi/a5-sportback/audia5sportback-2.jpg",
+      "/images/cars/audi/a5-sportback/audia5sportback-3.jpg",
+      "/images/cars/audi/a5-sportback/audia5sportback-4.jpg",
+      "/images/cars/audi/a5-sportback/audia5sportback-5.jpg",
+      "/images/cars/audi/a5-sportback/audia5sportback-6.jpg"
+
+
+    ],
+    "brand": "Audi A5 Sportback",
+    "year": "-",
+    "price": "- €",
+    "km": "-",
+    "fuel": "-",
+    "caixa": "-",
+    "segmento": "-",
+    "cilindrada": "-",
+    "potencia": "-",
+    "model": "- "
+
+    
+  },
+  
+           {
+    "image": "/images/cars/bmw/120d/bmw120dlimited-1.jpg",
+    "images": [
+      "/images/cars/bmw/120d/bmw120dlimited-1.jpg",
+      "/images/cars/bmw/120d/bmw120dlimited-2.jpg",
+      "/images/cars/bmw/120d/bmw120dlimited-3.jpg",
+      "/images/cars/bmw/120d/bmw120dlimited-4.jpg",
+      "/images/cars/bmw/120d/bmw120dlimited-5.jpg",
+      "/images/cars/bmw/120d/bmw120dlimited-6.jpg"
+
+
+    ],
+    "brand": "BMW 120d Limited",
+    "year": "-",
+    "price": "- €",
+    "km": "-",
+    "fuel": "-",
+    "caixa": "-",
+    "segmento": "-",
+    "cilindrada": "-",
+    "potencia": "-",
+    "model": "- "
+
+    
+  },
+  
+  {
+    "image": "/images/cars/bmw/220d/bmw220d-1.jpg",
+    "images": [
+      "/images/cars/bmw/220d/bmw220d-1.jpg",
+      "/images/cars/bmw/220d/bmw220d-2.jpg",
+      "/images/cars/bmw/220d/bmw220d-3.jpg",
+      "/images/cars/bmw/220d/bmw220d-4.jpg",
+      "/images/cars/bmw/220d/bmw220d-5.jpg",
+      "/images/cars/bmw/220d/bmw220d-6.jpg"
+
+
+    ],
+    "brand": "BMW 220d Limited",
+    "year": "-",
+    "price": "- €",
+    "km": "-",
+    "fuel": "-",
+    "caixa": "-",
+    "segmento": "-",
+    "cilindrada": "-",
+    "potencia": "-",
+    "model": "- "
+
+    
+  },
+         {
+    "image": "/images/cars/peugeot/3008/peugeot3008-1.jpg",
+    "images": [
+      "/images/cars/peugeot/3008/peugeot3008-1.jpg",
+      "/images/cars/peugeot/3008/peugeot3008-2.jpg",
+      "/images/cars/peugeot/3008/peugeot3008-3.jpg",
+      "/images/cars/peugeot/3008/peugeot3008-4.jpg",
+      "/images/cars/peugeot/3008/peugeot3008-5.jpg",
+      "/images/cars/peugeot/3008/peugeot3008-6.jpg"
+
+
+    ],
+    "brand": "Peugeot 3008",
+    "year": "-",
+    "price": "- €",
+    "km": "-",
+    "fuel": "-",
+    "caixa": "-",
+    "segmento": "-",
+    "cilindrada": "-",
+    "potencia": "-",
+    "model": "- "
+
+    
+  },
+   {
+    "image": "/images/cars/volkswagen/golf/tsi/golftsi-1.jpg",
+    "images": [
+      "/images/cars/volkswagen/golf/tsi/golftsi-1.jpg",
+      "/images/cars/volkswagen/golf/tsi/golftsi-2.jpg",
+      "/images/cars/volkswagen/golf/tsi/golftsi-3.jpg",
+      "/images/cars/volkswagen/golf/tsi/golftsi-4.jpg",
+      "/images/cars/volkswagen/golf/tsi/golftsi-5.jpg",
+      "/images/cars/volkswagen/golf/tsi/golftsi-6.jpg"
+
+
+    ],
+    "brand": "Golf TSI  ",
+    "year": "-",
+    "price": "- €",
+    "km": "-",
+    "fuel": "-",
+    "caixa": "-",
+    "segmento": "-",
+    "cilindrada": "-",
+    "potencia": "-",
+    "model": "- "
+
+    
+  }
+]
