@@ -155,7 +155,7 @@ body.no-scroll {
 /* MENU MOBILE */
 #menu-icon {
   font-size: 36px;
-  color: #111;
+  color: #fff;
   display: none;
   cursor: pointer;
 }
@@ -202,7 +202,7 @@ body.no-scroll {
 
   .navbar.active {
     display: flex;
-    background-color: #e9e7e7;
+    background-color: #000000;
   }
 
   .navbar a,

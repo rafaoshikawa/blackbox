@@ -288,8 +288,15 @@ body.modal-open {
 /* infos */
 .modal-info {
   margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
+.modal-content-info{
+  display: flex;
+  flex-direction: column;
+}
 .modal-meta {
   display: flex;
   gap: 10px;
@@ -300,7 +307,7 @@ body.modal-open {
 
 .modal-price strong {
   color: #ffd400;
-  font-size: 22px;
+  font-size: 2rem;
 }
 
 .modal-button {

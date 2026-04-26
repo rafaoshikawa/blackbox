@@ -282,7 +282,7 @@ li {
 
   @media (max-width: 768px) {
     font-size: 2.4rem;
-    line-height: 0.7;
+    line-height: 1;
   }
 }
 

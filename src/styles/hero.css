@@ -60,6 +60,12 @@
 /* responsivo */
 @media (max-width: 768px) {
   .container-hero h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
+  
   }
+
+  .container-btn{
+    margin-bottom: 40px;
+  }
+ 
 }

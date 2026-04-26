@@ -223,7 +223,7 @@
     "brand": "Peugeot 208 Style",
     "year": "Ago. 2016",
     "price": "7 500 €",
-    "km": "125 000",
+    "km": "125 000 km",
     "fuel": "Gasolina",
     "caixa": "Manual",
     "segmento": "Citadino",
@@ -249,7 +249,7 @@
     "brand": "VW Polo 1.4 GTi",
     "year": "Set. 2000",
     "price": "4 750 €",
-    "km": "234 680",
+    "km": "234 680 km",
     "fuel": "Gasolina",
     "caixa": "Manual",
     "segmento": "Pequeno Citadino",
@@ -433,6 +433,106 @@
     "cilindrada": "-",
     "potencia": "-",
     "model": "- "
+
+    
+  },
+    {
+    "image": "/images/cars/nissan/350zpack/350z-1.jpg",
+    "images": [
+      "/images/cars/nissan/350zpack/350z-1.jpg",
+      "/images/cars/nissan/350zpack/350z-2.jpg",
+      "/images/cars/nissan/350zpack/350z-3.jpg",
+      "/images/cars/nissan/350zpack/350z-4.jpg",
+      "/images/cars/nissan/350zpack/350z-5.jpg",
+      "/images/cars/nissan/350zpack/350z-7.jpg"
+
+
+    ],
+    "brand": "Nissan 350z Pack  ",
+    "year": "Jun. 2005",
+    "price": "29 990 €",
+    "km": "90 400 km",
+    "fuel": "Gasolina",
+    "caixa": "Manual",
+    "segmento": "Cabrio",
+    "cilindrada": "3 498 cm³",
+    "potencia": "280 cv",
+    "model": "Nissan 350Z 3.5 V6 Pack Tape Laranja Plus Navegador"
+
+    
+  },
+   {
+    "image": "/images/cars/citroen/c4/citroen-c4-1.jpg",
+    "images": [
+      "/images/cars/citroen/c4/citroen-c4-1.jpg",
+      "/images/cars/citroen/c4/citroen-c4-2.jpg",
+      "/images/cars/citroen/c4/citroen-c4-3.jpg",
+      "/images/cars/citroen/c4/citroen-c4-4.jpg",
+      "/images/cars/citroen/c4/citroen-c4-5.jpg",
+      "/images/cars/citroen/c4/citroen-c4-7.jpg"
+
+
+    ],
+    "brand": "Citroën C4 PureTech",
+    "year": "Fev. 2018",
+    "price": "11 990€",
+    "km": "114 255 km",
+    "fuel": "Gasolina",
+    "caixa": "Manual",
+    "segmento": "Utilitário",
+    "cilindrada": "1 199 cm³",
+    "potencia": "130 cv",
+    "model": "Citroën C4 ver-PureTech 130 Stop&Start Exclusive"
+
+    
+  },
+    {
+    "image": "/images/cars/volkswagen/scirocco/scirocco-1.jpg",
+    "images": [
+      "/images/cars/volkswagen/scirocco/scirocco-1.jpg",
+      "/images/cars/volkswagen/scirocco/scirocco-2.jpg",
+      "/images/cars/volkswagen/scirocco/scirocco-3.jpg",
+      "/images/cars/volkswagen/scirocco/scirocco-4.jpg",
+      "/images/cars/volkswagen/scirocco/scirocco-5.jpg",
+      "/images/cars/volkswagen/scirocco/scirocco-7.jpg"
+
+
+    ],
+    "brand": "VW Scirocco 2.0 TDI",
+    "year": "Out. 2009",
+    "price": "11 990 €",
+    "km": "231 032 km",
+    "fuel": "Diesel",
+    "caixa": "Manual",
+    "segmento": "Coupé",
+    "cilindrada": "1 968 cm³",
+    "potencia": "140 cv",
+    "model": "VW Scirocco ver-2.0 TDI "
+
+    
+  },
+    {
+    "image": "/images/cars/jaguar/xj/jaguarxj-1.jpg",
+    "images": [
+      "/images/cars/jaguar/xj/jaguarxj-1.jpg",
+      "/images/cars/jaguar/xj/jaguarxj-2.jpg",
+      "/images/cars/jaguar/xj/jaguarxj-3.jpg",
+      "/images/cars/jaguar/xj/jaguarxj-4.jpg",
+      "/images/cars/jaguar/xj/jaguarxj-5.jpg",
+      "/images/cars/jaguar/xj/jaguarxj-7.jpg"
+
+
+    ],
+    "brand": "Jaguar XJ 3.0",
+    "year": "Set. 2012",
+    "price": "15 990 €",
+    "km": "256 164 km",
+    "fuel": "Diesel",
+    "caixa": "Automática",
+    "segmento": "Sedan",
+    "cilindrada": "2 993 cm³",
+    "potencia": "275 cv",
+    "model": "Jaguar XJ 3.0 D V6 Premium Luxury"
 
     
   }
