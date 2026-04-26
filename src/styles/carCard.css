@@ -206,7 +206,13 @@ body.modal-open {
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 999999;
+}
+
+body.modal-open {
+  overflow: hidden;
+  height: 100vh;
+  touch-action: none;
 }
 
 .modal.active {
@@ -293,7 +299,7 @@ body.modal-open {
   flex-direction: column;
 }
 
-.modal-content-info{
+.modal-content-info {
   display: flex;
   flex-direction: column;
 }
