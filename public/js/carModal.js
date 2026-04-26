@@ -71,27 +71,66 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modalCilindrada) modalCilindrada.textContent = cilindrada || "-";
     if (modalPotencia) modalPotencia.textContent = potencia || "-";
 
-    // 🔥 ATIVA MODAL
     modal.classList.add("active");
 
-    // 🔥 BLOQUEIO TOTAL DE SCROLL (inclui iOS)
     document.body.classList.add("modal-open", "no-scroll");
     document.documentElement.classList.add("no-scroll");
   }
 
   // =====================
-  // CLICK + TOUCH
+  // 🔥 TOQUE INTELIGENTE (FIX MOBILE DRAG)
   // =====================
-  function handleCardClick(e) {
+  let startX = 0;
+  let startY = 0;
+  let moved = false;
+
+  document.addEventListener(
+    "touchstart",
+    (e) => {
+      const card = e.target.closest(".car-card");
+      if (!card) return;
+
+      const touch = e.touches[0];
+      startX = touch.clientX;
+      startY = touch.clientY;
+      moved = false;
+    },
+    { passive: true },
+  );
+
+  document.addEventListener(
+    "touchmove",
+    (e) => {
+      const touch = e.touches[0];
+
+      const dx = Math.abs(touch.clientX - startX);
+      const dy = Math.abs(touch.clientY - startY);
+
+      if (dx > 10 || dy > 10) {
+        moved = true; // 🔥 é scroll, não clique
+      }
+    },
+    { passive: true },
+  );
+
+  document.addEventListener("touchend", (e) => {
     const card = e.target.closest(".car-card");
     if (!card) return;
 
-    e.preventDefault?.();
-    openModal(card);
-  }
+    if (moved) return; // 🔥 se arrastou, não abre modal
 
-  document.addEventListener("click", handleCardClick);
-  document.addEventListener("touchstart", handleCardClick, { passive: true });
+    openModal(card);
+  });
+
+  // =====================
+  // CLICK DESKTOP
+  // =====================
+  document.addEventListener("click", (e) => {
+    const card = e.target.closest(".car-card");
+    if (!card) return;
+
+    openModal(card);
+  });
 
   // =====================
   // CLOSE MODAL
@@ -99,7 +138,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function closeModal() {
     modal.classList.remove("active");
 
-    // 🔥 LIBERA SCROLL
     document.body.classList.remove("modal-open", "no-scroll");
     document.documentElement.classList.remove("no-scroll");
   }
