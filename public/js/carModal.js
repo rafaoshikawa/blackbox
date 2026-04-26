@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let currentImages = [];
   let currentIndex = 0;
+  let scrollY = 0;
 
   // =====================
   // OPEN MODAL
@@ -44,8 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       currentImages = JSON.parse(card.dataset.images || "[]");
-    } catch (e) {
-      console.warn("Erro ao ler imagens:", e);
+    } catch {
       currentImages = [];
     }
 
@@ -71,14 +71,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modalCilindrada) modalCilindrada.textContent = cilindrada || "-";
     if (modalPotencia) modalPotencia.textContent = potencia || "-";
 
-    modal.classList.add("active");
+    // 🔥 GUARDA SCROLL REAL
+    scrollY = window.scrollY;
 
-    document.body.classList.add("modal-open", "no-scroll");
-    document.documentElement.classList.add("no-scroll");
+    document.body.style.top = `-${scrollY}px`;
+    document.body.classList.add("lock-scroll");
+
+    modal.classList.add("active");
   }
 
   // =====================
-  // 🔥 TOQUE INTELIGENTE (FIX MOBILE DRAG)
+  // TOUCH FIX
   // =====================
   let startX = 0;
   let startY = 0;
@@ -90,9 +93,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const card = e.target.closest(".car-card");
       if (!card) return;
 
-      const touch = e.touches[0];
-      startX = touch.clientX;
-      startY = touch.clientY;
+      const t = e.touches[0];
+      startX = t.clientX;
+      startY = t.clientY;
       moved = false;
     },
     { passive: true },
@@ -101,30 +104,22 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener(
     "touchmove",
     (e) => {
-      const touch = e.touches[0];
+      const t = e.touches[0];
+      const dx = Math.abs(t.clientX - startX);
+      const dy = Math.abs(t.clientY - startY);
 
-      const dx = Math.abs(touch.clientX - startX);
-      const dy = Math.abs(touch.clientY - startY);
-
-      if (dx > 10 || dy > 10) {
-        moved = true;
-      }
+      if (dx > 10 || dy > 10) moved = true;
     },
     { passive: true },
   );
 
   document.addEventListener("touchend", (e) => {
     const card = e.target.closest(".car-card");
-    if (!card) return;
-
-    if (moved) return;
+    if (!card || moved) return;
 
     openModal(card);
   });
 
-  // =====================
-  // CLICK DESKTOP
-  // =====================
   document.addEventListener("click", (e) => {
     const card = e.target.closest(".car-card");
     if (!card) return;
@@ -133,20 +128,17 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // =====================
-  // CLOSE MODAL (🔥 FIX DEFINITIVO SCROLL)
+  // CLOSE MODAL (FIX REAL iOS)
   // =====================
   function closeModal() {
     modal.classList.remove("active");
 
-    document.body.classList.remove("modal-open", "no-scroll");
-    document.documentElement.classList.remove("no-scroll");
+    document.body.classList.remove("lock-scroll");
 
-    // 🔥 impede Safari/iOS de resetar scroll
-    const scrollY = window.scrollY;
+    document.body.style.top = "";
+    document.body.style.position = "";
 
-    requestAnimationFrame(() => {
-      window.scrollTo(0, scrollY);
-    });
+    window.scrollTo(0, scrollY);
   }
 
   closeBtn?.addEventListener("click", closeModal);
@@ -167,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
     currentIndex = (currentIndex + 1) % currentImages.length;
     modalImg.src = currentImages[currentIndex];
   });
-  
+
   prevBtn?.addEventListener("click", () => {
     if (!currentImages.length) return;
     currentIndex =
