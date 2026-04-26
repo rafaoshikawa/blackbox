@@ -322,3 +322,103 @@
     display: flex;
     justify-content: center;
   }
+
+  /* =========================
+   STATUS BADGE (NOVO)
+========================= */
+
+.car-status {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10;
+
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 8px;
+  letter-spacing: 1px;
+
+  backdrop-filter: blur(6px);
+}
+
+/* VENDIDO */
+.car-status.vendido {
+  background: rgba(255, 0, 0, 0.85);
+  color: white;
+}
+
+/* RESERVADO */
+.car-status.reservado {
+  background: rgba(255, 165, 0, 0.85);
+  color: black;
+}
+
+/* opcional: escurecer carro vendido */
+.car-card[data-status="vendido"] {
+  opacity: 0.75;
+  filter: grayscale(0.4);
+}
+
+/* opcional: hover desativado em vendido */
+.car-card[data-status="vendido"]:hover {
+  transform: none;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+/* =========================
+   LINHA DIAGONAL (VENDIDO)
+========================= */
+
+.car-card[data-status="vendido"]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140%;
+  height: 3px;
+
+  background: rgba(255, 0, 0, 0.9);
+  transform: translate(-50%, -50%) rotate(45deg);
+
+  z-index: 9;
+  pointer-events: none;
+
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+}
+
+
+
+/* =========================
+   MODAL STATUS SYSTEM
+========================= */
+
+.modal.vendido .modal-content {
+  position: relative;
+  opacity: 0.9;
+}
+
+/* linha diagonal VENDIDO */
+.modal.vendido .modal-content::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160%;
+  height: 4px;
+
+  background: rgba(255, 0, 0, 0.9);
+  transform: translate(-50%, -50%) rotate(45deg);
+
+  z-index: 1;
+  pointer-events: none;
+
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
+}
+
+
+
+/* opcional: escurecer modal vendido */
+.modal.vendido .modal-content {
+  filter: grayscale(0.4);
+}

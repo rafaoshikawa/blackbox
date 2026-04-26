@@ -206,7 +206,8 @@
     "caixa": "Automática",
     "segmento": "SUV/TT",
     "cilindrada": "1 496 cm³",
-    "potencia": "116 cv"
+    "potencia": "116 cv",
+    "status": "vendido"
   },
             {
     "image": "/images/cars/peugeot/208/peugeot208-1.jpg",
@@ -330,7 +331,8 @@
     "segmento": "-",
     "cilindrada": "-",
     "potencia": "-",
-    "model": "- "
+    "model": "- ",
+    "status": "vendido"
 
     
   },
@@ -507,7 +509,8 @@
     "segmento": "Coupé",
     "cilindrada": "1 968 cm³",
     "potencia": "140 cv",
-    "model": "VW Scirocco ver-2.0 TDI "
+    "model": "VW Scirocco ver-2.0 TDI ",
+    "status": "vendido"
 
     
   },

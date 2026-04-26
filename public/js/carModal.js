@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalCilindrada = document.getElementById("modalCilindrada");
   const modalPotencia = document.getElementById("modalPotencia");
 
+  const modalStatus = document.getElementById("modalStatus");
+
   const nextBtn = document.querySelector(".next");
   const prevBtn = document.querySelector(".prev");
   const closeBtn = document.querySelector(".close-modal");
@@ -24,9 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
   let scrollY = 0;
 
-  // =====================
-  // OPEN MODAL
-  // =====================
   function openModal(card) {
     if (!card) return;
 
@@ -41,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
       segmento = "",
       cilindrada = "",
       potencia = "",
+      status = "disponivel",
     } = card.dataset;
 
     try {
@@ -71,18 +71,30 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modalCilindrada) modalCilindrada.textContent = cilindrada || "-";
     if (modalPotencia) modalPotencia.textContent = potencia || "-";
 
-    // 🔥 GUARDA SCROLL REAL
-    scrollY = window.scrollY;
+    // =========================
+    // STATUS TAG NO MODAL
+    // =========================
+    modal.classList.remove("vendido", "reservado", "disponivel");
+    modal.classList.add(status);
 
+    if (modalStatus) {
+      modalStatus.textContent =
+        status === "vendido"
+          ? "VENDIDO"
+          : status === "reservado"
+            ? "RESERVADO"
+            : "";
+
+      modalStatus.className = `car-status ${status}`;
+    }
+
+    scrollY = window.scrollY;
     document.body.style.top = `-${scrollY}px`;
     document.body.classList.add("lock-scroll");
 
     modal.classList.add("active");
   }
 
-  // =====================
-  // TOUCH FIX
-  // =====================
   let startX = 0;
   let startY = 0;
   let moved = false;
@@ -116,23 +128,17 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("touchend", (e) => {
     const card = e.target.closest(".car-card");
     if (!card || moved) return;
-
     openModal(card);
   });
 
   document.addEventListener("click", (e) => {
     const card = e.target.closest(".car-card");
     if (!card) return;
-
     openModal(card);
   });
 
-  // =====================
-  // CLOSE MODAL (FIX REAL iOS)
-  // =====================
   function closeModal() {
     modal.classList.remove("active");
-
     document.body.classList.remove("lock-scroll");
 
     document.body.style.top = "";
@@ -151,9 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape") closeModal();
   });
 
-  // =====================
-  // SLIDER
-  // =====================
   nextBtn?.addEventListener("click", () => {
     if (!currentImages.length) return;
     currentIndex = (currentIndex + 1) % currentImages.length;
