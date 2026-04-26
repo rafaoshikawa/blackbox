@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const dy = Math.abs(touch.clientY - startY);
 
       if (dx > 10 || dy > 10) {
-        moved = true; // 🔥 é scroll, não clique
+        moved = true;
       }
     },
     { passive: true },
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const card = e.target.closest(".car-card");
     if (!card) return;
 
-    if (moved) return; // 🔥 se arrastou, não abre modal
+    if (moved) return;
 
     openModal(card);
   });
@@ -133,13 +133,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // =====================
-  // CLOSE MODAL
+  // CLOSE MODAL (🔥 FIX DEFINITIVO SCROLL)
   // =====================
   function closeModal() {
     modal.classList.remove("active");
 
     document.body.classList.remove("modal-open", "no-scroll");
     document.documentElement.classList.remove("no-scroll");
+
+    // 🔥 impede Safari/iOS de resetar scroll
+    const scrollY = window.scrollY;
+
+    requestAnimationFrame(() => {
+      window.scrollTo(0, scrollY);
+    });
   }
 
   closeBtn?.addEventListener("click", closeModal);
@@ -160,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
     currentIndex = (currentIndex + 1) % currentImages.length;
     modalImg.src = currentImages[currentIndex];
   });
-
+  
   prevBtn?.addEventListener("click", () => {
     if (!currentImages.length) return;
     currentIndex =
