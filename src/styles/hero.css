@@ -1,4 +1,4 @@
-.hero {
+.hero-img {
   position: relative;
   min-height: 100vh;
   padding-top: 80px;
@@ -20,6 +20,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 /* overlay escuro para dar contraste */
@@ -39,6 +40,10 @@
   justify-content: center;
   position: relative;
   z-index: 1;
+}
+
+.btn-3-container{
+  margin:40px 0px;
 }
 
 .container-hero h1 {

@@ -6,6 +6,7 @@ import ColecaoCards from "./colecaoCards.astro";
 ---
 
 <section class="hero">
+  <div class="hero-img">
   <div class="container-hero mg-bottom container">
     <h1>
       <span class="strong-title"
@@ -26,6 +27,7 @@ import ColecaoCards from "./colecaoCards.astro";
         target="_blank"
         rel="noopener noreferrer">Ver viaturas</a
       >
+      </div>
     </div>
   </div>
 
@@ -38,7 +40,7 @@ import ColecaoCards from "./colecaoCards.astro";
     </div>
     <div class="card-grid-home">
       <ColecaoCards limit={6} />
-      <div>
+      <div class="btn-3-container">
         <a class="btn-3" href="/colecao" rel="noopener noreferrer">Ver mais</a>
       </div>
     </div>
