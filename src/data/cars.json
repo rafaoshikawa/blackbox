@@ -198,15 +198,15 @@
 
     ],
     "brand": "BMW X1 16 d sDrive",
-    "model": "BMW X1 1.5d sDrive Pack M Auto",
-    "year": "Set. 2019",
-    "price": "22 990 €",
-    "km": "119 117 km",
-    "fuel": "Diesel",
-    "caixa": "Automática",
-    "segmento": "SUV/TT",
-    "cilindrada": "1 496 cm³",
-    "potencia": "116 cv",
+    "model": "-",
+    "year": "-",
+    "price": "- €",
+    "km": "-",
+    "fuel": "-",
+    "caixa": "-",
+    "segmento": "-",
+    "cilindrada": "- cm³",
+    "potencia": "-",
     "status": "vendido"
   },
             {
@@ -273,15 +273,15 @@
 
     ],
     "brand": "BMW 118d",
-    "year": "-",
-    "price": "- €",
-    "km": "-",
-    "fuel": "-",
-    "caixa": "-",
-    "segmento": "-",
-    "cilindrada": "-",
-    "potencia": "-",
-    "model": "- "
+    "year": "Mai. 2013",
+    "price": "14 990 €",
+    "km": "195 455 km",
+    "fuel": "Diesel",
+    "caixa": "Automática",
+    "segmento": "Utilitário",
+    "cilindrada": "1 995 cm³",
+    "potencia": "143 cv",
+    "model": "BMW 118d Automático"
 
     
   },
@@ -298,15 +298,15 @@
 
     ],
     "brand": "BMW x5 40e",
-    "year": "-",
-    "price": "- €",
-    "km": "-",
-    "fuel": "-",
-    "caixa": "-",
-    "segmento": "-",
-    "cilindrada": "-",
-    "potencia": "-",
-    "model": "- "
+    "year": "Dez. 2017",
+    "price": "34 990 €",
+    "km": "105 212 km",
+    "fuel": "Híbrido Plug-In",
+    "caixa": "Automática",
+    "segmento": "SUV/TT",
+    "cilindrada": "1 997 cm³",
+    "potencia": "313",
+    "model": "BMW X5 xDrive 40e Pack"
 
     
   },
@@ -350,15 +350,15 @@
 
     ],
     "brand": "BMW 120d Limited",
-    "year": "-",
-    "price": "- €",
-    "km": "-",
-    "fuel": "-",
-    "caixa": "-",
-    "segmento": "-",
-    "cilindrada": "-",
-    "potencia": "-",
-    "model": "- "
+    "year": "Jun. 2009",
+    "price": "10 990 €",
+    "km": "389 555 km",
+    "fuel": "Diesel",
+    "caixa": "Manual",
+    "segmento": "Coupé",
+    "cilindrada": "1 995 cm³",
+    "potencia": "177 cv",
+    "model": "BMW 120 Cabrio"
 
     
   },
@@ -375,16 +375,16 @@
 
 
     ],
-    "brand": "BMW 220d Limited",
-    "year": "-",
-    "price": "- €",
-    "km": "-",
-    "fuel": "-",
-    "caixa": "-",
-    "segmento": "-",
-    "cilindrada": "-",
-    "potencia": "-",
-    "model": "- "
+    "brand": "BMW 220d",
+    "year": "Mar. 2016",
+    "price": "22 990 €",
+    "km": "194 372 km",
+    "fuel": "Diesel",
+    "caixa": "Manual",
+    "segmento": "Coupé",
+    "cilindrada": "1 995 cm³",
+    "potencia": "190 cv",
+    "model": "BMW 220 Cabrio"
 
     
   },
@@ -401,15 +401,15 @@
 
     ],
     "brand": "Peugeot 3008",
-    "year": "-",
-    "price": "- €",
-    "km": "-",
-    "fuel": "-",
-    "caixa": "-",
-    "segmento": "-",
-    "cilindrada": "-",
-    "potencia": "-",
-    "model": "- "
+    "year": "Jun. 2019",
+    "price": "17 990€",
+    "km": "112 358 km",
+    "fuel": "Diesel",
+    "caixa": "Manual",
+    "segmento": "SUV/TT",
+    "cilindrada": "1 499 cm³",
+    "potencia": "130 cv",
+    "model": "Peugeot 3008 – SUV de 2019"
 
     
   },
@@ -434,7 +434,8 @@
     "segmento": "-",
     "cilindrada": "-",
     "potencia": "-",
-    "model": "- "
+    "model": "- ",
+    "status": "vendido"
 
     
   },
@@ -501,15 +502,15 @@
 
     ],
     "brand": "VW Scirocco 2.0 TDI",
-    "year": "Out. 2009",
-    "price": "11 990 €",
-    "km": "231 032 km",
-    "fuel": "Diesel",
-    "caixa": "Manual",
-    "segmento": "Coupé",
-    "cilindrada": "1 968 cm³",
-    "potencia": "140 cv",
-    "model": "VW Scirocco ver-2.0 TDI ",
+    "year": "-",
+    "price": "- €",
+    "km": "-",
+    "fuel": "-",
+    "caixa": "-",
+    "segmento": "-",
+    "cilindrada": "-",
+    "potencia": "-",
+    "model": "-",
     "status": "vendido"
 
     
