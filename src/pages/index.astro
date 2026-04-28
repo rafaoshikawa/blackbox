@@ -5,6 +5,7 @@ import Footer from "../components/Footer.astro";
 import Home from "../components/Home.astro";
 import CarModal from "../components/CarModal.astro";
 import WhatsAppButton from "../components/WhatsAppButton.astro";
+import Services from "../components/Services.astro";
 
 import "../styles/global.css";
 import "../styles/header.css";
@@ -15,10 +16,10 @@ import "../styles/about.css";
 import "../styles/carCard.css";
 import "../styles/brands.css";
 import "../styles/colecao.css";
+import "../styles/services.css";
 ---
 
 <html lang="pt-BR">
-  
   <HeadBase />
 
   <body>
@@ -28,6 +29,7 @@ import "../styles/colecao.css";
     <Header />
     <WhatsAppButton />
     <Home />
+    <Services/>
     <CarModal />
     <Footer />
 
@@ -35,6 +37,5 @@ import "../styles/colecao.css";
     <script type="module" src="/js/script.js"></script>
     <script type="module" src="/js/carModal.js"></script>
     <script type="module" src="/js/slider-card.js"></script>
-    
   </body>
 </html>

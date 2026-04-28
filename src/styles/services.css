@@ -1,0 +1,102 @@
+.services {
+  min-height: 70vh; /* ocupa a tela toda */
+
+  display: flex;
+  align-items: center; /* central vertical */
+  justify-content: center; /* central horizontal */
+
+  background: linear-gradient(135deg, #2b2b2b 0%, #111111 100%);
+  padding: 40px 20px;
+  
+
+
+}
+.container-services {
+  width: 100%;
+  max-width: 1200px;
+
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+
+ 
+}
+.gradient-gold-2 {
+  display: block;
+  font-size: 3rem;
+  background: linear-gradient(to right, #fdb924, #ff7a00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.container-btn-services {
+  display: flex;
+  justify-content: center; /* 🔥 centraliza horizontal */
+  align-items: center;
+  gap: 40px;
+  margin: 80px 0;
+  flex-wrap: wrap; /* importante pra quebrar bonito */
+}
+
+.container-info-services {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centraliza tudo */
+  text-align: center; /* garante centralização do texto */
+  width: 100%;
+}
+
+.btn-services {
+  width: 350px;
+  height: 200px;
+  border-radius: 20px;
+
+  /* Fundo escuro elegante */
+  background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+
+  /* Borda com efeito luxo (não branca chapada) */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  /* Profundidade */
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+
+  cursor: pointer;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+
+ 
+}
+
+.btn-services:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+
+@media (max-width: 768px) {
+  .container-btn-services {
+    flex-direction: column; /* 🔥 empilha */
+    align-items: center; /* centraliza */
+    gap: 30px;
+  }
+
+  .btn-services {
+    width: 100%;
+    max-width: 350px; /* mantém padrão bonito */
+  }
+}

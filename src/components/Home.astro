@@ -3,6 +3,8 @@
 
 import Brands from "./Brands.astro";
 import ColecaoCards from "./colecaoCards.astro";
+import Services from "../components/Services.astro";
+
 ---
 
 <section class="hero">
@@ -18,12 +20,10 @@ import ColecaoCards from "./colecaoCards.astro";
       </h1>
 
       <div class="container-btn">
-        <a class="btn-2" href="#">Pedir proposta</a>
+        <a class="btn-2" href="https://whatsa.me/351924478766/?t=Ol%C3%A1!%20Gostava%20de%20pedir%20uma%20proposta,%20podem%20ajudar?">Pedir proposta</a>
         <a
           class="btn-3"
-          href="https://blackbox-carstudio.standvirtual.com/inventory"
-          target="_blank"
-          rel="noopener noreferrer">Ver viaturas</a
+          href="/viaturas">Ver viaturas</a
         >
       </div>
     </div>
@@ -39,7 +39,7 @@ import ColecaoCards from "./colecaoCards.astro";
   <div class="card-grid-home">
     <ColecaoCards limit={6} />
     <div class="btn-3-container">
-      <a class="btn-3" href="/viaturas" rel="noopener noreferrer">Ver mais</a>
+      <a class="btn-3" href="/viaturas">Ver mais</a>
     </div>
   </div>
 

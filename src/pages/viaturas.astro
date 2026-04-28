@@ -3,6 +3,8 @@ import HeadBase from "../components/HeadBase.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import WhatsAppButton from "../components/WhatsAppButton.astro";
+import Services from "../components/Services.astro";
+
 
 import CarList from "../components/CarList.astro";
 import CarModal from "../components/CarModal.astro";
@@ -14,6 +16,8 @@ import "../styles/cardgrid.css";
 import "../styles/carCard.css";
 import "../styles/brands.css";
 import "../styles/colecao.css";
+import "../styles/services.css";
+
 ---
 
 <html lang="pt-BR">
@@ -39,9 +43,9 @@ import "../styles/colecao.css";
       </div>
       <CarList />
     </section>
-
     <!-- MODAL GLOBAL (reutilizável em qualquer página) -->
     <CarModal />
+    <Services/>
 
     <Footer />
 
