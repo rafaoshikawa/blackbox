@@ -278,8 +278,8 @@
     background: rgba(0, 0, 0, 0.6);
     border: none;
     color: white;
-    font-size: 22px;
-    padding: 8px 12px;
+    font-size: 40px;
+    padding: 8px 20px;
     cursor: pointer;
     border-radius: 8px;
   }
@@ -344,6 +344,7 @@
 
 /* VENDIDO */
 .car-status.vendido {
+  
   background: rgba(255, 0, 0, 0.85);
   color: white;
 }
@@ -357,7 +358,7 @@
 /* opcional: escurecer carro vendido */
 .car-card[data-status="vendido"] {
   opacity: 0.75;
-  filter: grayscale(0.4);
+  filter: grayscale(1);
 }
 
 /* opcional: hover desativado em vendido */
@@ -375,11 +376,11 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 140%;
+  width: 180%;
   height: 3px;
 
   background: rgba(255, 0, 0, 0.9);
-  transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, -50%) rotate(57deg);
 
   z-index: 9;
   pointer-events: none;
@@ -408,7 +409,7 @@
   height: 4px;
 
   background: rgba(255, 0, 0, 0.9);
-  transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, -50%) rotate(38deg);
 
   z-index: 1;
   pointer-events: none;
@@ -420,5 +421,5 @@
 
 /* opcional: escurecer modal vendido */
 .modal.vendido .modal-content {
-  filter: grayscale(0.4);
+  filter: grayscale(1);
 }

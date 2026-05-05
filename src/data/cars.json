@@ -67,7 +67,8 @@
     "caixa": "Manual",
     "segmento": "Carrinha",
     "cilindrada": "1 560 cm³",
-    "potencia": "110 cv"
+    "potencia": "110 cv",
+    "status":"vendido"
   },
       {
     "image": "/images/cars/audi/A1/audia1.jpg",
@@ -237,7 +238,7 @@
   ,
             {
     "image": "/images/cars/volkswagen/polo/gti/pologti-1.jpg",
-    "images": [
+  "images": [
       "/images/cars/volkswagen/polo/gti/pologti-1.jpg",
       "/images/cars/volkswagen/polo/gti/pologti-2.jpg",
       "/images/cars/volkswagen/polo/gti/pologti-3.jpg",

@@ -2,7 +2,6 @@
    BASE GERAL
 =============================== */
 
-
 /* ===============================
    SECTION QUALIDADE + PRAZO
 =============================== */
@@ -20,15 +19,22 @@
 }
 
 .qualidade-container-2 {
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
   gap: 1.2rem;
-  flex-wrap: nowrap;
 
-  p{
+  p {
     margin-bottom: 20px;
   }
+}
+
+.qualidade-container-2-text{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 }
 
 .qualidade-title {
@@ -89,7 +95,6 @@
   max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
-  
 }
 
 /* SVGs das marcas */
@@ -153,4 +158,13 @@
   .qualidade-desc {
     font-size: 0.85rem;
   }
+}
+
+
+.brands-container svg.jaguar path {
+  fill: #919090 !important;
+}
+
+.brands-container svg.jaguar:hover path {
+  fill: #d4af37 !important;
 }
