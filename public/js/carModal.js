@@ -22,17 +22,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const prevBtn = document.querySelector(".prev");
   const closeBtn = document.querySelector(".close-modal");
 
-  // =========================
-  // IMAGE VIEWER (CARROSSEL)
-  // =========================
   const imageViewer = document.getElementById("imageViewer");
   const imageTrack = document.getElementById("imageTrack");
   const expandBtn = document.querySelector(".expand-image");
   const closeImageViewer = document.querySelector(".close-image-viewer");
 
+  const singleViewer = document.getElementById("singleImageViewer");
+  const singleImg = document.getElementById("singleExpandedImg");
+  const closeSingleBtn = document.querySelector(".close-single-image");
+
   let currentImages = [];
   let currentIndex = 0;
   let scrollY = 0;
+
+  document.documentElement.style.scrollBehavior = "auto";
 
   function openModal(card) {
     if (!card) return;
@@ -87,76 +90,59 @@ document.addEventListener("DOMContentLoaded", () => {
         status === "vendido"
           ? "VENDIDO"
           : status === "reservado"
-          ? "RESERVADO"
-          : "";
+            ? "RESERVADO"
+            : "";
 
       modalStatus.className = `car-status ${status}`;
     }
 
+    document.title = `${brand} ${model} | Blackbox Auto`;
+
     scrollY = window.scrollY;
+
+    document.body.style.position = "fixed";
     document.body.style.top = `-${scrollY}px`;
-    document.body.classList.add("lock-scroll");
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
 
     modal.classList.add("active");
   }
 
-  // =========================
-  // TOUCH OPEN MODAL
-  // =========================
-  let startX = 0;
-  let startY = 0;
-  let moved = false;
+  function closeModal() {
+    modal.classList.remove("active");
 
-  document.addEventListener(
-    "touchstart",
-    (e) => {
-      const card = e.target.closest(".car-card");
-      if (!card) return;
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
+    document.body.style.width = "";
 
-      const t = e.touches[0];
-      startX = t.clientX;
-      startY = t.clientY;
-      moved = false;
-    },
-    { passive: true }
-  );
+    window.scrollTo(0, scrollY);
 
-  document.addEventListener(
-    "touchmove",
-    (e) => {
-      const t = e.touches[0];
-      const dx = Math.abs(t.clientX - startX);
-      const dy = Math.abs(t.clientY - startY);
-
-      if (dx > 10 || dy > 10) moved = true;
-    },
-    { passive: true }
-  );
-
-  document.addEventListener("touchend", (e) => {
-    const card = e.target.closest(".car-card");
-    if (!card || moved) return;
-    openModal(card);
-  });
+    document.title = "Blackbox Auto";
+  }
 
   document.addEventListener("click", (e) => {
     const card = e.target.closest(".car-card");
-    if (!card) return;
+
+    if (!card || modal.contains(e.target)) return;
+
     openModal(card);
   });
 
-  // =========================
-  // CLOSE MODAL
-  // =========================
-  function closeModal() {
-    modal.classList.remove("active");
-    document.body.classList.remove("lock-scroll");
+  nextBtn?.addEventListener("click", () => {
+    if (!currentImages.length) return;
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    modalImg.src = currentImages[currentIndex];
+  });
 
-    document.body.style.top = "";
-    document.body.style.position = "";
-
-    window.scrollTo(0, scrollY);
-  }
+  prevBtn?.addEventListener("click", () => {
+    if (!currentImages.length) return;
+    currentIndex =
+      (currentIndex - 1 + currentImages.length) % currentImages.length;
+    modalImg.src = currentImages[currentIndex];
+  });
 
   closeBtn?.addEventListener("click", closeModal);
 
@@ -165,30 +151,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeModal();
+    if (e.key === "Escape") {
+      closeModal();
+      imageViewer?.classList.remove("active");
+      singleViewer?.classList.remove("active");
+    }
   });
 
   // =========================
-  // NEXT / PREV (MODAL NORMAL)
-  // =========================
-  nextBtn?.addEventListener("click", () => {
-    if (!currentImages.length) return;
-
-    currentIndex = (currentIndex + 1) % currentImages.length;
-    modalImg.src = currentImages[currentIndex];
-  });
-
-  prevBtn?.addEventListener("click", () => {
-    if (!currentImages.length) return;
-
-    currentIndex =
-      (currentIndex - 1 + currentImages.length) % currentImages.length;
-
-    modalImg.src = currentImages[currentIndex];
-  });
-
-  // =========================
-  // IMAGE VIEWER (CARROSSEL EXPANDIDO)
+  // GALERIA VERTICAL
   // =========================
   function openImageViewer() {
     if (!currentImages.length || !imageTrack) return;
@@ -198,6 +169,11 @@ document.addEventListener("DOMContentLoaded", () => {
     currentImages.forEach((src) => {
       const img = document.createElement("img");
       img.src = src;
+
+      img.addEventListener("click", () => {
+        openSingleImage(src);
+      });
+
       imageTrack.appendChild(img);
     });
 
@@ -216,14 +192,26 @@ document.addEventListener("DOMContentLoaded", () => {
   closeImageViewer?.addEventListener("click", closeImageViewerModal);
 
   imageViewer?.addEventListener("click", (e) => {
-    if (e.target === imageViewer) {
-      closeImageViewerModal();
-    }
+    if (e.target === imageViewer) closeImageViewerModal();
   });
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      closeImageViewerModal();
+  // =========================
+  // FULLSCREEN IMAGEM INDIVIDUAL
+  // =========================
+  function openSingleImage(src) {
+    if (!singleViewer || !singleImg) return;
+
+    singleImg.src = src;
+    singleViewer.classList.add("active");
+  }
+
+  closeSingleBtn?.addEventListener("click", () => {
+    singleViewer.classList.remove("active");
+  });
+
+  singleViewer?.addEventListener("click", (e) => {
+    if (e.target === singleViewer) {
+      singleViewer.classList.remove("active");
     }
   });
 });

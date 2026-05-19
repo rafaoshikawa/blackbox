@@ -46,6 +46,10 @@
   z-index: 1;
 }
 
+.container-hero p{
+  margin-bottom: 20px;
+}
+
 .btn-3-container{
   margin:40px 0px;
 }
@@ -83,3 +87,5 @@
     margin-bottom: 40px;
   }
 }
+
+

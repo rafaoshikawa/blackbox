@@ -41,7 +41,28 @@ import "../styles/services.css";
           Conheça a nossa coleção de automóveis disponíveis para si
         </h2>
       </div>
+      <div class="viaturas-search-container">
+  <div class="search-box">
+    <input
+      type="text"
+      id="viaturasSearchInput"
+      class="search-input"
+      placeholder="Pesquisar viaturas..."
+    />
+  </div>
+
+  <div class="filter-actions">
+    <button id="clearFilters">Limpar filtros</button>
+    <button id="showAll">Mostrar todos</button>
+  </div>
+</div>
       <CarList />
+      <div id="noResults" class="no-results" style="display:none;">
+  <h3>Nenhuma viatura encontrada</h3>
+  <p>Tenta outra pesquisa ou remove os filtros.</p>
+
+  <a href="/viaturas" class="btn-no-results">Ver todas as viaturas</a>
+</div>
     </section>
     <!-- MODAL GLOBAL (reutilizável em qualquer página) -->
     <CarModal />
@@ -53,5 +74,6 @@ import "../styles/services.css";
     <script type="module" src="/js/script.js"></script>
     <script type="module" src="/js/carModal.js"></script>
     <script type="module" src="/js/slider-card.js"></script>
+    <script type="module" src="/js/viaturas.js"></script>
   </body>
 </html>
