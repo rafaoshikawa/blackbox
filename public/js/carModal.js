@@ -22,6 +22,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const prevBtn = document.querySelector(".prev");
   const closeBtn = document.querySelector(".close-modal");
 
+  // =========================
+  // IMAGE VIEWER (CARROSSEL)
+  // =========================
+  const imageViewer = document.getElementById("imageViewer");
+  const imageTrack = document.getElementById("imageTrack");
+  const expandBtn = document.querySelector(".expand-image");
+  const closeImageViewer = document.querySelector(".close-image-viewer");
+
   let currentImages = [];
   let currentIndex = 0;
   let scrollY = 0;
@@ -71,9 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modalCilindrada) modalCilindrada.textContent = cilindrada || "-";
     if (modalPotencia) modalPotencia.textContent = potencia || "-";
 
-    // =========================
-    // STATUS TAG NO MODAL
-    // =========================
     modal.classList.remove("vendido", "reservado", "disponivel");
     modal.classList.add(status);
 
@@ -82,8 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
         status === "vendido"
           ? "VENDIDO"
           : status === "reservado"
-            ? "RESERVADO"
-            : "";
+          ? "RESERVADO"
+          : "";
 
       modalStatus.className = `car-status ${status}`;
     }
@@ -95,6 +100,9 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.add("active");
   }
 
+  // =========================
+  // TOUCH OPEN MODAL
+  // =========================
   let startX = 0;
   let startY = 0;
   let moved = false;
@@ -110,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
       startY = t.clientY;
       moved = false;
     },
-    { passive: true },
+    { passive: true }
   );
 
   document.addEventListener(
@@ -122,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (dx > 10 || dy > 10) moved = true;
     },
-    { passive: true },
+    { passive: true }
   );
 
   document.addEventListener("touchend", (e) => {
@@ -137,6 +145,9 @@ document.addEventListener("DOMContentLoaded", () => {
     openModal(card);
   });
 
+  // =========================
+  // CLOSE MODAL
+  // =========================
   function closeModal() {
     modal.classList.remove("active");
     document.body.classList.remove("lock-scroll");
@@ -157,16 +168,62 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape") closeModal();
   });
 
+  // =========================
+  // NEXT / PREV (MODAL NORMAL)
+  // =========================
   nextBtn?.addEventListener("click", () => {
     if (!currentImages.length) return;
+
     currentIndex = (currentIndex + 1) % currentImages.length;
     modalImg.src = currentImages[currentIndex];
   });
 
   prevBtn?.addEventListener("click", () => {
     if (!currentImages.length) return;
+
     currentIndex =
       (currentIndex - 1 + currentImages.length) % currentImages.length;
+
     modalImg.src = currentImages[currentIndex];
+  });
+
+  // =========================
+  // IMAGE VIEWER (CARROSSEL EXPANDIDO)
+  // =========================
+  function openImageViewer() {
+    if (!currentImages.length || !imageTrack) return;
+
+    imageTrack.innerHTML = "";
+
+    currentImages.forEach((src) => {
+      const img = document.createElement("img");
+      img.src = src;
+      imageTrack.appendChild(img);
+    });
+
+    imageViewer.classList.add("active");
+  }
+
+  function closeImageViewerModal() {
+    imageViewer.classList.remove("active");
+  }
+
+  expandBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    openImageViewer();
+  });
+
+  closeImageViewer?.addEventListener("click", closeImageViewerModal);
+
+  imageViewer?.addEventListener("click", (e) => {
+    if (e.target === imageViewer) {
+      closeImageViewerModal();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeImageViewerModal();
+    }
   });
 });

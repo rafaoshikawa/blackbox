@@ -4,19 +4,21 @@
 
 .hero-img {
   position: relative;
-  min-height: 100vh;
-  padding-top: 80px;
+
+  /* FULL WIDTH */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 
-  /* 🔥 imagem de fundo estável */
   background-image: url("/images/cars/homewallpaper.png");
-  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}
+  background-size: cover;
 
+  min-height: 100vh;
+}
 .card-grid-home {
   display: flex;
   justify-content: center;
@@ -26,11 +28,11 @@
 }
 
 /* overlay escuro para dar contraste */
-.hero::before {
+.hero-img::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.175);
+  background: rgba(255, 0, 0, 0.534);
   z-index: -1;
 }
 

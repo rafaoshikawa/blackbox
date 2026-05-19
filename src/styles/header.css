@@ -36,39 +36,14 @@ body.no-scroll {
   align-items: center;
 }
 
-/* LOGO */
 .logo {
   display: flex;
-  justify-content: center;
   align-items: center;
-
-  font-size: 1.6rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-
-  background: linear-gradient(
-    135deg,
-    #e0e0e0 0%,
-    #f5f5f5 50%,
-    #b0b0b0 100%
-  );
-
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  /* borda mais escura (efeito metal) */
-  -webkit-text-stroke: 0.8px rgba(0, 0, 0, 0.35);
-
-  text-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.4);
-
-  cursor: pointer;
-  transition: 0.3s ease;
 }
 
 .logo img {
   width: 150px;
+  display: block;
 }
 
 .header-title {

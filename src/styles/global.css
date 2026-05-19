@@ -536,6 +536,7 @@ li {
   background: linear-gradient(to right, #fdb924, #ff7a00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-style: bold;
 }
 
 /* brilho premium */

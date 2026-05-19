@@ -538,7 +538,76 @@
     "cilindrada": "2 993 cm³",
     "potencia": "275 cv",
     "model": "Jaguar XJ 3.0 D V6 Premium Luxury"
+  },
+  {
+    "image": "/images/cars/renault/renault-clio-1.jpg",
+    "images": [
+      "/images/cars/renault/renault-clio-1.jpg",
+      "/images/cars/renault/renault-clio-2.jpg",
+      "/images/cars/renault/renault-clio-3.jpg",
+      "/images/cars/renault/renault-clio-4.jpg",
+      "/images/cars/renault/renault-clio-5.jpg",
+      "/images/cars/renault/renault-clio-7.jpg"
 
-    
+
+    ],
+    "brand": "Renault Clio 1.5",
+    "year": "Set. 2014",
+    "price": "8 990 €",
+    "km": "187 131 km",
+    "fuel": "Diesel",
+    "caixa": "Manual",
+    "segmento": "Citadino",
+    "cilindrada": "1 461 cm³",
+    "potencia": "75 cv",
+    "model": "Renault Clio ver-1-5-dci-75-expression"
+  },
+   {
+    "image": "/images/cars/citroen/berlingo/citroen-berlingo-1.jpg",
+    "images": [
+      "/images/cars/citroen/berlingo/citroen-berlingo-1.jpg",
+      "/images/cars/citroen/berlingo/citroen-berlingo-2.jpg",
+      "/images/cars/citroen/berlingo/citroen-berlingo-3.jpg",
+      "/images/cars/citroen/berlingo/citroen-berlingo-4.jpg",
+      "/images/cars/citroen/berlingo/citroen-berlingo-5.jpg",
+      "/images/cars/citroen/berlingo/citroen-berlingo-7.jpg"
+
+
+    ],
+    "brand": "Citroën Berlingo",
+    "year": "Abr. 2015",
+    "price": "8 750 €",
+    "km": "242 856 km",
+    "fuel": "Diesel",
+    "caixa": "Manual",
+    "segmento": "Comerciais Ligeiros",
+    "cilindrada": "1 596 cm³",
+    "potencia": "90 cv",
+    "model": "Citroen Berlingo Diesel Manual"
+  },
+
+   {
+    "image": "/images/cars/peugeot/208/peugeot-branco-208-1.jpg",
+    "images": [
+      "/images/cars/peugeot/208/peugeot-branco-208-1.jpg",
+      "/images/cars/peugeot/208/peugeot-branco-208-2.jpg",
+      "/images/cars/peugeot/208/peugeot-branco-208-3.jpg",
+      "/images/cars/peugeot/208/peugeot-branco-208-4.jpg",
+      "/images/cars/peugeot/208/peugeot-branco-208-5.jpg",
+      "/images/cars/peugeot/208/peugeot-branco-208-7.jpg"
+
+
+    ],
+    "brand": "Peugeot 208 1.6",
+    "year": "Mai. 2014",
+    "price": "8 990 €",
+    "km": "162 040 km",
+    "fuel": "Diesel",
+    "caixa": "Manual",
+    "segmento": "Citadino",
+    "cilindrada": "1 560 cm³",
+    "potencia": "75 cv",
+    "model": "Peugeot 208 ver-1-6-bluehdi-style"
   }
+  
 ]

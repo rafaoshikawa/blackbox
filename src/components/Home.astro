@@ -5,33 +5,10 @@ import Brands from "./Brands.astro";
 import ColecaoCards from "./colecaoCards.astro";
 import Services from "../components/Services.astro";
 ---
-
-<section class="hero">
-  <div class="hero-img">
-    <div class="container-hero mg-bottom container">
-      <h1>
-        Onde à performance <br />
-        <span class="gradient-gold" style="line-height: 1.3;"
-          >encontra elegância</span
-        >
-
-        <p class="text-1">Transforme cada viagem numa experiência única.</p>
-      </h1>
-
-      <div class="container-btn">
-        <a
-          class="btn-2"
-          href="https://whatsa.me/351924478766/?t=Ol%C3%A1!%20Gostava%20de%20pedir%20uma%20proposta,%20podem%20ajudar?"
-          >Pedir proposta</a
-        >
-        <a class="btn-3" href="/viaturas">Ver viaturas</a>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="products container">
+<div class="hero-img">
+<section class="  products container ">
   <div class="container-hero container">
-    <p class="text-2">As Nossas Viaturas</p>
+    <h2 class="gradient-gold text-2" style="margin-top: 80px;">As Nossas Viaturas</h2>
     <p class="text-1" id="viaturas">
       Conheça a nossa seleção de viaturas disponíveis para si
     </p>
@@ -45,6 +22,9 @@ import Services from "../components/Services.astro";
 
   <div class="slider-dots"></div>
 </section>
+</div>
+
+
 
 <Brands />
 
