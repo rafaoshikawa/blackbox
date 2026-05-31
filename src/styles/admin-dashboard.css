@@ -1,0 +1,456 @@
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: #09090b;
+  color: #fff;
+}
+
+/* HEADER */
+.dashboard-header {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.dashboard-header p {
+  margin-top: 6px;
+  color: #71717a;
+}
+
+/* GRID */
+.cars-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+
+  gap: 24px;
+  padding: 0 40px 100px;
+}
+
+/* CARD */
+.car-card {
+  position: relative;
+
+  background: #111111;
+
+  border: 1px solid #1f1f1f;
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  transition: 0.25s;
+}
+
+.car-card:hover {
+  transform: translateY(-6px);
+
+  border-color: #333;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45);
+}
+
+/* CHECKBOX */
+.checkbox {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 10;
+
+  width: 18px;
+  height: 18px;
+
+  transition: 0.2s;
+}
+
+/* ESCONDE CHECKBOX QUANDO MODAL ESTÁ ABERTO */
+body.modal-open .checkbox {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ESCONDE CHECKBOX QUANDO CONFIRM OU MODAL ABERTO */
+body.modal-open .car-card,
+body.modal-open .cars-grid {
+  pointer-events: none !important;
+}
+
+/* IMAGE */
+.car-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+
+  display: block;
+}
+
+/* CONTENT */
+.car-content {
+  padding: 18px;
+}
+
+.car-content h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.car-content p {
+  margin-top: 8px;
+  color: #a1a1aa;
+  font-size: 14px;
+}
+
+/* META */
+.car-meta {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 18px;
+
+  color: #d4d4d8;
+  font-size: 14px;
+}
+
+/* ACTIONS */
+.car-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.car-actions button {
+  flex: 1;
+
+  border: none;
+  border-radius: 10px;
+
+  padding: 10px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.edit-btn {
+  background: #1e40af;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #2563eb;
+}
+
+.delete-btn {
+  background: #991b1b;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+/* DELETE MULTIPLE */
+.delete-selected {
+  display: none;
+
+  background: #dc2626;
+  color: white;
+
+  border: none;
+  border-radius: 12px;
+
+  padding: 12px 18px;
+
+  cursor: pointer;
+}
+
+.delete-selected.active {
+  display: block;
+}
+
+/* FAB */
+.fab {
+  position: fixed;
+
+  bottom: 30px;
+  right: 30px;
+
+  width: 70px;
+  height: 70px;
+
+  border-radius: 50%;
+
+  border: none;
+
+  background: white;
+  color: black;
+
+  font-size: 36px;
+  font-weight: 300;
+
+  cursor: pointer;
+
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+
+  transition: 0.25s;
+}
+
+.fab:hover {
+  transform: scale(1.08);
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.8);
+
+  display: none;
+
+  justify-content: center;
+  align-items: center;
+
+  backdrop-filter: blur(10px);
+
+  padding: 20px;
+  z-index: 9999;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  width: 520px;
+  max-width: 95vw;
+
+  background: #111111;
+
+  border: 1px solid #222;
+  border-radius: 20px;
+
+  padding: 25px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 16px;
+
+  max-height: 90vh;
+  overflow-y: auto;
+
+  position: relative;
+}
+
+/* CLOSE BUTTON MODAL */
+.close-modal {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  background: transparent;
+  border: none;
+
+  color: white;
+  font-size: 24px;
+
+  cursor: pointer;
+}
+
+/* TITLE + BUTTON FULL WIDTH */
+.modal-content h2,
+#save-car {
+  grid-column: 1 / -1;
+}
+
+/* INPUTS */
+.modal-content input {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 12px;
+
+  background: #18181b;
+
+  border: 1px solid #27272a;
+  border-radius: 10px;
+
+  color: white;
+}
+
+/* SAVE BUTTON */
+#save-car {
+  width: 100%;
+
+  padding: 14px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: white;
+  color: black;
+
+  cursor: pointer;
+
+  margin-top: 10px;
+}
+
+/* CONFIRM OVERLAY */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.7);
+
+  display: none;
+
+  justify-content: center;
+  align-items: center;
+
+  z-index: 10000;
+}
+
+.confirm-overlay.active {
+  display: flex;
+}
+
+.confirm-box {
+  background: #111;
+  border: 1px solid #222;
+
+  padding: 20px;
+  border-radius: 14px;
+
+  width: 320px;
+
+  text-align: center;
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.confirm-actions button {
+  flex: 1;
+
+  padding: 10px;
+
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer;
+}
+
+#confirm-yes {
+  background: #dc2626;
+  color: white;
+}
+
+#confirm-no {
+  background: #27272a;
+  color: white;
+}
+
+/* IMAGE PREVIEW */
+.image-preview {
+  position: fixed;
+  inset: 0;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.9);
+
+  z-index: 10001;
+}
+
+.image-preview.active {
+  display: flex;
+}
+
+.image-preview-inner {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 12px;
+}
+
+.image-preview button {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+
+  background: white;
+  border: none;
+
+  font-size: 20px;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* IMAGE ROW */
+.img-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 6px;
+  border: 1px solid #333;
+  border-radius: 8px;
+
+  margin-bottom: 6px;
+  gap: 10px;
+}
+
+.img-row span {
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 85%;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cars-grid {
+    padding: 0 20px 100px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    grid-template-columns: 1fr;
+    width: 95%;
+  }
+}

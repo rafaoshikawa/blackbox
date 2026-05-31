@@ -1,0 +1,46 @@
+---
+
+---
+
+<h1>Upload Test</h1>
+
+<input type="file" id="file" />
+<button id="btn">Upload</button>
+
+<pre id="out"></pre>
+
+<script type="module">
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+  const supabase = createClient(
+    "https://ziylcoupschcusnlsblu.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InppeWxjb3Vwc2NoY3VzbmxzYmx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMDAwMjksImV4cCI6MjA5NTc3NjAyOX0.6HdFwkPcwxUTlbKvhr3EoSI1qz3U9e3fCeITLr8eVmY",
+  );
+
+  const out = document.getElementById("out");
+
+  document.getElementById("btn").onclick = async () => {
+    const file = document.getElementById("file").files[0];
+
+    if (!file) {
+      out.textContent = "Selecione um arquivo primeiro.";
+      return;
+    }
+
+    // 🔥 REMOVIDO "cars/" daqui para evitar duplicação
+    const path = `${Date.now()}-${file.name}`;
+
+    const { data, error } = await supabase.storage
+      .from("cars")
+      .upload(path, file);
+
+    if (error) {
+      out.textContent = JSON.stringify(error, null, 2);
+      return;
+    }
+
+    const { data: url } = supabase.storage.from("cars").getPublicUrl(path);
+
+    out.textContent = JSON.stringify(url, null, 2);
+  };
+</script>

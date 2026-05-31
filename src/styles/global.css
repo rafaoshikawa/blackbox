@@ -183,7 +183,7 @@ li {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto; /* centraliza horizontalmente */
-  padding: 20px;
+  padding: 10px;
 
   @media (max-width: 768px) {
     .container {

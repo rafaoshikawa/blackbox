@@ -1,15 +1,19 @@
 ---
-import cars from "../data/cars.json";
+import { supabase } from "../lib/supabase.js";
 import CarCard from "./CarCard.astro";
 
-const { limit } = Astro.props;
+const { data: cars, error } = await supabase
+  .from("cars")
+  .select("*")
+  .order("id", { ascending: true });
 
-// se tiver limite, corta o array
-const carsToShow = limit ? cars.slice(0, limit) : cars;
+const carsToShow = cars ?? [];
+
+if (error) {
+  console.error(error);
+}
 ---
 
 <div class="card-grid">
-  {carsToShow.map((car) => (
-    <CarCard car={car} />
-  ))}
+  {carsToShow.map((car) => <CarCard car={car} />)}
 </div>

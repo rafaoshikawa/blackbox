@@ -1,0 +1,75 @@
+---
+import { supabase } from "../../lib/supabase.js";
+import "../../styles/admin-login.css";
+---
+
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login Admin</title>
+  </head>
+
+  <body class="login-body">
+    <div class="login-container">
+      <h1 class="login-title">Login</h1>
+
+      <form id="login-form" class="login-form" accept-charset="utf-8">
+        <input
+          class="login-input"
+          name="email"
+          type="email"
+          placeholder="Email"
+          required
+        />
+        <input
+          class="login-input"
+          name="password"
+          type="password"
+          placeholder="Password"
+          required
+        />
+        <button class="login-button" type="submit">Entrar</button>
+      </form>
+
+      <p id="error" class="login-error"></p>
+    </div>
+
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+      const supabase = createClient(
+        "https://ziylcoupschcusnlsblu.supabase.co",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InppeWxjb3Vwc2NoY3VzbmxzYmx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMDAwMjksImV4cCI6MjA5NTc3NjAyOX0.6HdFwkPcwxUTlbKvhr3EoSI1qz3U9e3fCeITLr8eVmY",
+      );
+
+      const form = document.getElementById("login-form");
+      const errorMsg = document.getElementById("error");
+
+      console.log("LOGIN PAGE OK");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        const email = formData.get("email");
+        const password = formData.get("password");
+
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        console.log("LOGIN:", { data, error });
+
+        if (error) {
+          errorMsg.textContent = error.message;
+          return;
+        }
+
+        window.location.href = "/admin/dashboard";
+      });
+    </script>
+  </body>
+</html>

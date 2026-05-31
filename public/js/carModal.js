@@ -82,18 +82,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modalCilindrada) modalCilindrada.textContent = cilindrada || "-";
     if (modalPotencia) modalPotencia.textContent = potencia || "-";
 
+    const safeStatus = status?.trim() || "disponivel";
+
     modal.classList.remove("vendido", "reservado", "disponivel");
-    modal.classList.add(status);
+    modal.classList.add(safeStatus);
 
     if (modalStatus) {
       modalStatus.textContent =
-        status === "vendido"
+        safeStatus === "vendido"
           ? "VENDIDO"
-          : status === "reservado"
+          : safeStatus === "reservado"
             ? "RESERVADO"
             : "";
 
-      modalStatus.className = `car-status ${status}`;
+      modalStatus.className = `car-status ${safeStatus}`;
     }
 
     document.title = `${brand} ${model} | Blackbox Auto`;
@@ -158,9 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // =========================
-  // GALERIA VERTICAL
-  // =========================
   function openImageViewer() {
     if (!currentImages.length || !imageTrack) return;
 
@@ -195,9 +194,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === imageViewer) closeImageViewerModal();
   });
 
-  // =========================
-  // FULLSCREEN IMAGEM INDIVIDUAL
-  // =========================
   function openSingleImage(src) {
     if (!singleViewer || !singleImg) return;
 
