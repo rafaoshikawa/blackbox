@@ -5,7 +5,7 @@ import CarCard from "./CarCard.astro";
 const { data: cars, error } = await supabase
   .from("cars")
   .select("*")
-  .order("id", { ascending: true });
+  .order("id", { ascending: false });
 
 const carsToShow = cars ?? [];
 

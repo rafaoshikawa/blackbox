@@ -5,7 +5,7 @@ import "../../styles/admin-dashboard.css";
 const { data: cars } = await supabase
   .from("cars")
   .select("*")
-  .order("id", { ascending: true });
+  .order("id", { ascending: false }); // ← alterado aqui
 
 const safeCars = cars ?? [];
 ---
