@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="pt"> <head><meta charset="UTF-8"><title>Teste Supabase</title></head> <body> <h1>🧪 Teste Supabase</h1> <button id="test-connection">Testar conexão</button> <button id="test-login">Testar login</button> <button id="test-db">Testar DB (cars)</button> <pre id="output"></pre> <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+      const supabase = createClient(
+        "https://ziylcoupschcusnlsblu.supabase.co",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InppeWxjb3Vwc2NoY3VzbmxzYmx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMDAwMjksImV4cCI6MjA5NTc3NjAyOX0.6HdFwkPcwxUTlbKvhr3EoSI1qz3U9e3fCeITLr8eVmY",
+      );
+
+      const output = document.getElementById("output");
+
+      function log(data) {
+        output.textContent += JSON.stringify(data, null, 2) + "\n\n";
+      }
+
+      document
+        .getElementById("test-connection")
+        .addEventListener("click", async () => {
+          log("🔌 testando...");
+          const res = await supabase.auth.getSession();
+          log(res);
+        });
+
+      document
+        .getElementById("test-login")
+        .addEventListener("click", async () => {
+          log("🔑 login...");
+          const res = await supabase.auth.signInWithPassword({
+            email: "teste@gmail.com",
+            password: "123456",
+          });
+          log(res);
+        });
+
+      document.getElementById("test-db").addEventListener("click", async () => {
+        log("📦 db...");
+        const res = await supabase.from("cars").select("*").limit(5);
+        log(res);
+      });
+    </script> </body> </html>

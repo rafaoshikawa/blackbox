@@ -1,0 +1,34 @@
+[33ma3bfc97[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m feat: mover dados do site para Supabase e criar painel admin com login para gerir carros (CRUD completo)
+[33m534f071[m feat: inserção do search input, filtros dinamicos, brands clicaveis e filtraveis
+[33mb475148[m update:zoom indicar e image-track expand modificado
+[33m11a4cb8[m feat: modal expand image nos cards, adiçao de +1 serviço
+[33maf7a6dd[m update: ortografias, e estilos
+[33m50ff0ec[m update: info carros
+[33m7cfa5d4[m feat: adiçao de seçao de services, e hrefs dos CTA'S
+[33ma474410[m feat: meta description
+[33mba4ed99[m feat: implementaçao do status de cada carro, vendido ou reservado, image preview
+[33m35e6724[m feat: adiçao de loader
+[33m162ff96[m feat: ajustes de tamanho do map
+[33m6546aa3[m feat: ajustes de layout, grids
+[33m9737c61[m fix: overflow-y hidden do carrossel de imagem
+[33m7a047bf[m fix: scroll ao fechar modal
+[33m6848b1d[m fix: close modal
+[33ma47bab7[m feat: ajuste do toque no card para abrir o modal quando clique e nao quando arrasta
+[33m0370c6f[m fix: consertando
+[33m262c136[m fix: overflow e container quebrado na home no mobile
+[33m6ffdd29[m try: ajuste do modal na home tentativa 2
+[33mbfbba95[m try: ajuste do modal na home
+[33m599e955[m try: tentativa de consertar modal na home
+[33meb2e4fc[m fix: modal na home
+[33m07d9042[m fix: car modal na home nao estava correto
+[33m203392f[m fix: correçao do menu burger em colecao
+[33m7f60ff2[m fix: pagina de colecao nao estava a funcionar o menu burger
+[33ma76bb67[m feat: mudança no script do menu burger
+[33m848cdfa[m feat: scripts foram para js dentro de public
+[33me23142a[m feat: alteraçao do caminho do diretorio dos scripts em header.astro
+[33m34fcce6[m feat: alteraçao do caminho do diretorio dos scripts em colecaoCards.astro
+[33m38e0312[m feat: alteraçao do nome da pasta js para scripts e mudando o caminho do diretorio no index
+[33mc49c9d2[m feat: Alteraçao do JS para funcionamento do car Modal no IOS
+[33mb3e4906[m feat: ajuste menu burger e navegaçoes
+[33m07fb1d0[m feat(ui): atualização  navbar, adiciona Google Maps no footer e ajusta tipografia
+[33mf9b8c37[m first commit
