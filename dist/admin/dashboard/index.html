@@ -1,308 +1,343 @@
-<!DOCTYPE html><html lang="pt"> <head><meta charset="UTF-8"><title>Dashboard</title><link rel="stylesheet" href="/_astro/dashboard.CSH8R77N.css"></head> <body> <div class="dashboard-header"> <div> <h1>Dashboard</h1> <button id="logout" class="logout-btn">Logout</button> </div> <button id="delete-selected" class="delete-selected">
+<!DOCTYPE html><html lang="pt"> <head><meta charset="UTF-8"><title>Dashboard</title><link rel="stylesheet" href="/_astro/dashboard.Cku9oxni.css"></head> <body> <div id="auth-guard" style="display:none;"> <div class="dashboard-header"> <div class="dashboard-header-2"> <h1>Dashboard</h1> <button id="logout" class="logout-btn">Logout</button> </div> <button id="delete-selected" class="delete-selected">
 🗑 Apagar Selecionados
-</button> </div> <div class="cars-grid"> <div class="car-card" data-id="1"> <input type="checkbox" class="checkbox"> <img src="https://ziylcoupschcusnlsblu.supabase.co/storage/v1/object/public/cars/1780242754900-citroenc3-1.jpg" class="car-image"> <div class="car-content"> <h3>Citroen C3</h3> <p>BMW M3 3.0 DKG 431cv</p> <div class="car-meta"> <span>Jun. 2016</span> <span>70 000 €</span> </div> <div class="car-actions"> <button class="edit-btn">✏ Editar</button> <button class="delete-btn">🗑 Apagar</button> </div> </div> </div><div class="car-card" data-id="2"> <input type="checkbox" class="checkbox"> <img src="https://ziylcoupschcusnlsblu.supabase.co/storage/v1/object/public/cars/1780244949332-mercedez.jpg" class="car-image"> <div class="car-content"> <h3>Mercedes-Benz B 180</h3> <p>Mercedes-Benz B-180 CDI BlueEfficiency 7G-DCT 109cv</p> <div class="car-meta"> <span>Jan. 2013</span> <span>13 500 €</span> </div> <div class="car-actions"> <button class="edit-btn">✏ Editar</button> <button class="delete-btn">🗑 Apagar</button> </div> </div> </div><div class="car-card" data-id="3"> <input type="checkbox" class="checkbox"> <img src="/images/cars/minicooper/minicooperd.jpg" class="car-image"> <div class="car-content"> <h3>Mini Clubman Cooper D</h3> <p>MINI Clubman Cooper D 1.6 110cv</p> <div class="car-meta"> <span>Out. 2009</span> <span>8 990 €</span> </div> <div class="car-actions"> <button class="edit-btn">✏ Editar</button> <button class="delete-btn">🗑 Apagar</button> </div> </div> </div> </div> <button class="fab" id="open-modal">+</button> <!-- MODAL --> <div class="modal" id="modal"> <div class="modal-content"> <button class="close-modal" id="close-modal">×</button> <h2>Carro</h2> <label>Nome</label> <input id="brand"> <label>Descrição</label> <input id="model"> <label>Ano</label> <input id="year"> <label>Preço</label> <input id="price"> <label>Km</label> <input id="km"> <label>Combustível</label> <input id="fuel"> <label>Caixa</label> <input id="caixa"> <label>Segmento</label> <input id="segmento"> <label>Cilindrada</label> <input id="cilindrada"> <label>Potencia</label> <input id="potencia"> <label>Status</label> <input id="status" placeholder="vendido/reservado/disponivel"> <label>Imagem de Capa (1)</label> <input type="file" id="coverImage" accept="image/*"> <label>Outras Imagens (max 14)</label> <input type="file" id="galleryImages" accept="image/*" multiple> <div id="existing-images-box" style="display:none; margin-top:10px;"> <h4>Imagens atuais</h4> <div id="existing-images"></div> </div> <div id="new-images-box" style="margin-top:10px;"> <h4>Imagens adicionadas</h4> <div id="new-images"></div> </div> <button id="save-car">Guardar</button> </div> </div> <!-- CONFIRM DELETE --> <div id="confirm-overlay" class="confirm-overlay"> <div class="confirm-box"> <p>Tens certeza que queres remover este item?</p> <div class="confirm-actions"> <button id="confirm-no">Cancelar</button> <button id="confirm-yes">Apagar</button> </div> </div> </div> <!-- IMAGE PREVIEW --> <div id="image-preview" class="image-preview"> <div class="image-preview-inner"> <img id="image-preview-img"> <button id="close-preview">×</button> </div> </div> <script type="module">
-  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+</button> </div> <div class="cars-grid" id="cars-grid"></div> <button class="fab" id="open-modal">+</button> <!-- MODAL --> <div class="modal" id="modal"> <div class="modal-content"> <button class="close-modal" id="close-modal">×</button> <h2>Carro</h2> <label for="brand">Nome</label> <input id="brand"> <label for="model">Descrição</label> <input id="model"> <label for="price">Preço</label> <input id="price"> <label for="year">Ano</label> <input id="year"> <label for="km">Km</label> <input id="km"> <label for="fuel">Combustível</label> <input id="fuel"> <label for="caixa">Caixa</label> <input id="caixa"> <label for="cilindrada">Cilindrada</label> <input id="cilindrada"> <label for="potencia">Potencia</label> <input id="potencia"> <label for="segmento">Segmento</label> <input id="segmento"> <label for="status">Status</label> <input id="status" placeholder="vendido/reservado/disponivel"> <input type="file" id="galleryImages" accept="image/*" multiple style="display:none"> <div id="image-manager"> <h4>Imagens · 1ª é a capa · arrasta ≡ para reordenar</h4> <div class="img-list" id="img-list"></div> <button class="add-image-btn" id="add-image-btn">+ Adicionar Imagens</button> </div> <button id="save-car">Guardar</button> </div> </div> <!-- CONFIRM DELETE --> <div id="confirm-overlay" class="confirm-overlay"> <div class="confirm-box"> <p>Tens certeza que queres remover este item?</p> <div class="confirm-actions"> <button id="confirm-no">Cancelar</button> <button id="confirm-yes">Apagar</button> </div> </div> </div> <!-- IMAGE PREVIEW fullscreen --> <div id="image-preview" class="image-preview"> <div class="image-preview-inner"> <img id="image-preview-img"> <button id="close-preview">×</button> </div> </div> </div> <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
-  const supabase = createClient(
-    "https://ziylcoupschcusnlsblu.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InppeWxjb3Vwc2NoY3VzbmxzYmx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMDAwMjksImV4cCI6MjA5NTc3NjAyOX0.6HdFwkPcwxUTlbKvhr3EoSI1qz3U9e3fCeITLr8eVmY",
-  );
+      const supabase = createClient(
+        "https://ziylcoupschcusnlsblu.supabase.co",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InppeWxjb3Vwc2NoY3VzbmxzYmx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMDAwMjksImV4cCI6MjA5NTc3NjAyOX0.6HdFwkPcwxUTlbKvhr3EoSI1qz3U9e3fCeITLr8eVmY",
+      );
 
-  let editingId = null;
-  let deleteId = null;
-  let deleteMode = null;
+      const authGuard         = document.getElementById("auth-guard");
+      const carsGrid          = document.getElementById("cars-grid");
+      const modal             = document.getElementById("modal");
+      const closeModalBtn     = document.getElementById("close-modal");
+      const confirmOverlay    = document.getElementById("confirm-overlay");
+      const confirmYes        = document.getElementById("confirm-yes");
+      const confirmNo         = document.getElementById("confirm-no");
+      const galleryInput      = document.getElementById("galleryImages");
+      const imgList           = document.getElementById("img-list");
+      const addImageBtn       = document.getElementById("add-image-btn");
+      const preview           = document.getElementById("image-preview");
+      const previewImg        = document.getElementById("image-preview-img");
+      const closePreview      = document.getElementById("close-preview");
+      const deleteSelectedBtn = document.getElementById("delete-selected");
 
-  let currentImages = [];
-  let removedImages = [];
-  let newSelectedFiles = [];
-  let coverImageFile = null;
-
-  const modal = document.getElementById("modal");
-  const closeModalBtn = document.getElementById("close-modal");
-
-  const confirmOverlay = document.getElementById("confirm-overlay");
-  const confirmYes = document.getElementById("confirm-yes");
-  const confirmNo = document.getElementById("confirm-no");
-
-  const coverImage = document.getElementById("coverImage");
-  const galleryImages = document.getElementById("galleryImages");
-
-  const existingBox = document.getElementById("existing-images-box");
-  const existingImagesEl = document.getElementById("existing-images");
-
-  const newBox = document.getElementById("new-images-box");
-  const newImagesEl = document.getElementById("new-images");
-
-  const preview = document.getElementById("image-preview");
-  const previewImg = document.getElementById("image-preview-img");
-  const closePreview = document.getElementById("close-preview");
-
-  const deleteSelectedBtn = document.getElementById("delete-selected");
-
-  const fields = {
-    brand: document.getElementById("brand"),
-    model: document.getElementById("model"),
-    year: document.getElementById("year"),
-    price: document.getElementById("price"),
-    km: document.getElementById("km"),
-    fuel: document.getElementById("fuel"),
-    caixa: document.getElementById("caixa"),
-    segmento: document.getElementById("segmento"),
-    cilindrada: document.getElementById("cilindrada"),
-    potencia: document.getElementById("potencia"),
-    status: document.getElementById("status"),
-  };
-
-  function clearForm() {
-    Object.values(fields).forEach((f) => (f.value = ""));
-    coverImage.value = "";
-    galleryImages.value = "";
-
-    currentImages = [];
-    removedImages = [];
-    newSelectedFiles = [];
-    coverImageFile = null;
-
-    existingImagesEl.innerHTML = "";
-    newImagesEl.innerHTML = "";
-
-    existingBox.style.display = "none";
-    newBox.style.display = "none";
-  }
-
-  function getFileName(url) {
-    return url.split("?")[0].split("/").pop();
-  }
-
-  function openPreview(url) {
-    previewImg.src = url;
-    preview.classList.add("active");
-  }
-
-  closePreview.onclick = () => preview.classList.remove("active");
-
-  function uploadFile(file) {
-    return new Promise(async (resolve, reject) => {
-      const path = `${Date.now()}-${file.name}`;
-
-      const { error } = await supabase.storage
-        .from("cars")
-        .upload(path, file);
-
-      if (error) return reject(error);
-
-      const { data } = supabase.storage.from("cars").getPublicUrl(path);
-      resolve(data.publicUrl);
-    });
-  }
-
-  function renderNewImages() {
-    newImagesEl.innerHTML = "";
-
-    newSelectedFiles.forEach((file, index) => {
-      const wrap = document.createElement("div");
-      wrap.className = "img-row";
-
-      const text = document.createElement("span");
-      text.textContent = file.name;
-      text.onclick = () => openPreview(URL.createObjectURL(file));
-
-      const btn = document.createElement("button");
-      btn.textContent = "X";
-
-      btn.onclick = () => {
-        newSelectedFiles.splice(index, 1);
-        renderNewImages();
+      const fields = {
+        brand:      document.getElementById("brand"),
+        model:      document.getElementById("model"),
+        year:       document.getElementById("year"),
+        price:      document.getElementById("price"),
+        km:         document.getElementById("km"),
+        fuel:       document.getElementById("fuel"),
+        caixa:      document.getElementById("caixa"),
+        segmento:   document.getElementById("segmento"),
+        cilindrada: document.getElementById("cilindrada"),
+        potencia:   document.getElementById("potencia"),
+        status:     document.getElementById("status"),
       };
 
-      wrap.appendChild(text);
-      wrap.appendChild(btn);
-      newImagesEl.appendChild(wrap);
-    });
+      let editingId    = null;
+      let deleteId     = null;
+      let deleteMode   = null;
+      let deleteIds    = [];
+      let imageSlots   = [];
+      let dragSrcIndex = null;
 
-    newBox.style.display = newSelectedFiles.length ? "block" : "none";
-  }
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        window.location.href = "/admin";
+      } else {
+        authGuard.style.display = "block";
+      }
 
-  function renderExistingImages() {
-    existingImagesEl.innerHTML = "";
+      async function loadCars() {
+        const { data: cars } = await supabase
+          .from("cars")
+          .select("*")
+          .order("id", { ascending: false });
+        renderCars(cars ?? []);
+      }
 
-    const all = [...currentImages];
+      function renderCars(cars) {
+        carsGrid.innerHTML = "";
+        cars.forEach((car) => carsGrid.appendChild(createCarCard(car)));
+      }
 
-    all.forEach((img) => {
-      const wrap = document.createElement("div");
-      wrap.className = "img-row";
+      function createCarCard(car) {
+        const card = document.createElement("div");
+        card.className = "car-card";
+        card.dataset.id = car.id;
+        card.innerHTML = `
+          <input type="checkbox" class="checkbox" />
+          <img src="${car.image ?? ""}" class="car-image" />
+          <div class="car-content">
+            <h3>${car.brand ?? ""}</h3>
+            <p>${car.model ?? ""}</p>
+            <div class="car-meta">
+              <span>${car.year ?? ""}</span>
+              <span>${car.price ?? ""}</span>
+            </div>
+            <div class="car-actions">
+              <button class="edit-btn">✏ Editar</button>
+              <button class="delete-btn">🗑 Apagar</button>
+            </div>
+          </div>
+        `;
+        return card;
+      }
 
-      const text = document.createElement("span");
-      text.textContent = getFileName(img);
-      text.onclick = () => openPreview(img);
+      function clearForm() {
+        Object.values(fields).forEach((f) => (f.value = ""));
+        galleryInput.value = "";
+        imageSlots = [];
+        renderList();
+      }
 
-      const btn = document.createElement("button");
-      btn.textContent = "X";
+      function openPreview(url) {
+        previewImg.src = url;
+        preview.classList.add("active");
+      }
 
-      btn.onclick = () => {
-        removedImages.push(img);
-        currentImages = currentImages.filter((i) => i !== img);
-        renderExistingImages();
-      };
+      closePreview.onclick = () => preview.classList.remove("active");
 
-      wrap.appendChild(text);
-      wrap.appendChild(btn);
-      existingImagesEl.appendChild(wrap);
-    });
+      function slotPreviewUrl(slot) {
+        return slot.type === "existing" ? slot.url : URL.createObjectURL(slot.file);
+      }
 
-    existingBox.style.display = all.length ? "block" : "none";
-  }
+      function slotLabel(slot) {
+        if (slot.type === "new") return slot.file.name;
+        return decodeURIComponent(slot.url.split("?")[0].split("/").pop());
+      }
 
-  function openModal() {
-    document.querySelectorAll(".checkbox").forEach((c) => (c.checked = false));
-    modal.classList.add("active");
-  }
+      async function uploadFile(file) {
+        const path = `${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`;
+        const { error } = await supabase.storage.from("cars").upload(path, file);
+        if (error) throw error;
+        return supabase.storage.from("cars").getPublicUrl(path).data.publicUrl;
+      }
 
-  function closeModal() {
-    modal.classList.remove("active");
-    clearForm();
-  }
+      function renderList() {
+        imgList.innerHTML = "";
+        imageSlots.forEach((slot, index) => {
+          const row = document.createElement("div");
+          row.className = "img-row" + (index === 0 ? " is-cover" : "");
+          row.draggable = true;
+          row.dataset.index = index;
 
-  document.getElementById("open-modal").onclick = () => {
-    editingId = null;
-    clearForm();
-    openModal();
-  };
+          const num = document.createElement("span");
+          num.className = "row-num";
+          num.textContent = index + 1;
 
-  closeModalBtn.onclick = closeModal;
+          const handle = document.createElement("div");
+          handle.className = "drag-handle";
+          handle.innerHTML = "≡";
+          handle.title = "Arrastar para reordenar";
 
-  modal.onclick = (e) => {
-    if (e.target === modal) closeModal();
-  };
+          const name = document.createElement("span");
+          name.className = "row-name";
+          name.textContent = slotLabel(slot);
+          name.title = "Ver em grande";
+          name.onclick = (e) => {
+            e.stopPropagation();
+            openPreview(slotPreviewUrl(slot));
+          };
 
-  /* ==============================
-     🔥 FIX PRINCIPAL AQUI
-     - NÃO substitui mais arquivos
-     - sempre adiciona
-     ============================== */
+          const removeBtn = document.createElement("button");
+          removeBtn.className = "remove-row";
+          removeBtn.innerHTML = "🗑";
+          removeBtn.title = "Remover";
+          removeBtn.onclick = (e) => {
+            e.stopPropagation();
+            imageSlots.splice(index, 1);
+            renderList();
+          };
 
-  galleryImages.addEventListener("change", (e) => {
-    const files = Array.from(e.target.files);
+          row.appendChild(num);
+          row.appendChild(handle);
+          row.appendChild(name);
+          row.appendChild(removeBtn);
 
-    const remaining = 14 - newSelectedFiles.length;
-    const toAdd = files.slice(0, remaining);
+          row.addEventListener("dragstart",  onDragStart);
+          row.addEventListener("dragover",   onDragOver);
+          row.addEventListener("dragleave",  onDragLeave);
+          row.addEventListener("drop",       onDrop);
+          row.addEventListener("dragend",    onDragEnd);
 
-    newSelectedFiles = [...newSelectedFiles, ...toAdd];
+          imgList.appendChild(row);
+        });
+      }
 
-    renderNewImages();
+      function onDragStart(e) {
+        dragSrcIndex = parseInt(this.dataset.index);
+        this.classList.add("dragging");
+        e.dataTransfer.effectAllowed = "move";
+      }
+      function onDragOver(e) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "move";
+        this.classList.add("drag-over");
+      }
+      function onDragLeave() {
+        this.classList.remove("drag-over");
+      }
+      function onDrop(e) {
+        e.preventDefault();
+        this.classList.remove("drag-over");
+        const targetIndex = parseInt(this.dataset.index);
+        if (dragSrcIndex === null || dragSrcIndex === targetIndex) return;
+        const moved = imageSlots.splice(dragSrcIndex, 1)[0];
+        imageSlots.splice(targetIndex, 0, moved);
+        renderList();
+      }
+      function onDragEnd() {
+        dragSrcIndex = null;
+        imgList.querySelectorAll(".img-row").forEach((el) =>
+          el.classList.remove("dragging", "drag-over")
+        );
+      }
 
-    // permite re-adicionar mesmo o mesmo ficheiro
-    galleryImages.value = "";
-  });
-
-  /* ==============================
-     CAPA TAMBÉM ENTRA NA LISTA
-     ============================== */
-
-  coverImage.addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    coverImageFile = file;
-
-    const remaining = 14 - newSelectedFiles.length;
-    if (remaining > 0) {
-      newSelectedFiles.push(file);
-    }
-
-    renderNewImages();
-
-    coverImage.value = "";
-  });
-
-  document.addEventListener("click", async (e) => {
-    const card = e.target.closest(".car-card");
-    if (!card) return;
-
-    const id = card.dataset.id;
-
-    if (e.target.classList.contains("edit-btn")) {
-      const { data } = await supabase
-        .from("cars")
-        .select("*")
-        .eq("id", id)
-        .maybeSingle();
-
-      if (!data) return;
-
-      editingId = id;
-
-      Object.keys(fields).forEach((k) => {
-        fields[k].value = data[k] ?? "";
+      addImageBtn.onclick = () => galleryInput.click();
+      galleryInput.addEventListener("change", (e) => {
+        const files = Array.from(e.target.files);
+        const available = 15 - imageSlots.length;
+        files.slice(0, available).forEach((file) =>
+          imageSlots.push({ type: "new", file })
+        );
+        renderList();
+        galleryInput.value = "";
       });
 
-      currentImages = data.images || [];
-      removedImages = [];
-      newSelectedFiles = [];
-      coverImageFile = null;
+      function openModal() {
+        document.querySelectorAll(".checkbox").forEach((c) => (c.checked = false));
+        modal.classList.add("active");
+      }
+      function closeModal() {
+        modal.classList.remove("active");
+        clearForm();
+      }
 
-      renderExistingImages();
-      renderNewImages();
-      openModal();
-    }
+      document.getElementById("open-modal").onclick = () => {
+        editingId = null;
+        clearForm();
+        openModal();
+      };
+      closeModalBtn.onclick = closeModal;
+      modal.onclick = (e) => { if (e.target === modal) closeModal(); };
 
-    if (e.target.classList.contains("delete-btn")) {
-      deleteId = id;
-      deleteMode = "single";
-      confirmOverlay.classList.add("active");
-    }
-  });
+      carsGrid.addEventListener("click", async (e) => {
+        const card = e.target.closest(".car-card");
+        if (!card) return;
+        const id = card.dataset.id;
 
-  document.getElementById("save-car").onclick = async () => {
-    const payload = {};
+        if (e.target.classList.contains("edit-btn")) {
+          const { data } = await supabase
+            .from("cars").select("*").eq("id", id).maybeSingle();
+          if (!data) return;
 
-    Object.keys(fields).forEach((k) => {
-      payload[k] = fields[k].value;
-    });
+          editingId = id;
+          Object.keys(fields).forEach((k) => { fields[k].value = data[k] ?? ""; });
 
-    let uploaded = [];
+          imageSlots = [];
+          if (data.images && data.images.length > 0) {
+            data.images.forEach((url) => imageSlots.push({ type: "existing", url }));
+            if (data.image) {
+              const coverIdx = imageSlots.findIndex((s) => s.url === data.image);
+              if (coverIdx > 0) {
+                const [coverSlot] = imageSlots.splice(coverIdx, 1);
+                imageSlots.unshift(coverSlot);
+              } else if (coverIdx === -1) {
+                imageSlots.unshift({ type: "existing", url: data.image });
+              }
+            }
+          } else if (data.image) {
+            imageSlots.push({ type: "existing", url: data.image });
+          }
 
-    if (coverImageFile) {
-      uploaded.push(await uploadFile(coverImageFile));
-    }
+          renderList();
+          openModal();
+        }
 
-    if (newSelectedFiles.length) {
-      const extra = await Promise.all(newSelectedFiles.map(uploadFile));
-      uploaded.push(...extra);
-    }
+        if (e.target.classList.contains("delete-btn")) {
+          deleteId   = id;
+          deleteMode = "single";
+          confirmOverlay.classList.add("active");
+        }
+      });
 
-    payload.image = uploaded[0] || payload.image;
+      document.getElementById("save-car").onclick = async () => {
+        const saveBtn = document.getElementById("save-car");
+        saveBtn.disabled = true;
+        saveBtn.textContent = "A guardar...";
 
-    payload.images = [
-      ...currentImages.filter((i) => !removedImages.includes(i)),
-      ...uploaded,
-    ];
+        try {
+          const payload = {};
+          Object.keys(fields).forEach((k) => { payload[k] = fields[k].value; });
 
-    if (editingId) {
-      await supabase.from("cars").update(payload).eq("id", editingId);
-    } else {
-      await supabase.from("cars").insert([payload]);
-    }
+          const resolvedUrls = await Promise.all(
+            imageSlots.map((slot) =>
+              slot.type === "existing"
+                ? Promise.resolve(slot.url)
+                : uploadFile(slot.file)
+            )
+          );
 
-    location.reload();
-  };
+          payload.images = resolvedUrls;
+          payload.image  = resolvedUrls[0] ?? "";
 
-  confirmNo.onclick = () => confirmOverlay.classList.remove("active");
+          if (editingId) {
+            const { data: updated } = await supabase
+              .from("cars").update(payload).eq("id", editingId).select().maybeSingle();
+            if (updated) {
+              const existingCard = carsGrid.querySelector(`[data-id="${editingId}"]`);
+              if (existingCard) existingCard.replaceWith(createCarCard(updated));
+            }
+          } else {
+            const { data: inserted } = await supabase
+              .from("cars").insert([payload]).select().maybeSingle();
+            if (inserted) carsGrid.prepend(createCarCard(inserted));
+          }
 
-  confirmYes.onclick = async () => {
-    if (deleteMode === "single") {
-      await supabase.from("cars").delete().eq("id", deleteId);
-    }
+          closeModal();
+        } catch (err) {
+          console.error("Erro ao guardar:", err);
+          alert("Erro ao guardar. Verifica a consola.");
+        } finally {
+          saveBtn.disabled = false;
+          saveBtn.textContent = "Guardar";
+        }
+      };
 
-    location.reload();
-  };
+      confirmNo.onclick  = () => confirmOverlay.classList.remove("active");
+      confirmYes.onclick = async () => {
+        if (deleteMode === "single" && deleteId) {
+          await supabase.from("cars").delete().eq("id", deleteId);
+          carsGrid.querySelector(`[data-id="${deleteId}"]`)?.remove();
+          deleteId = null;
+        }
+        if (deleteMode === "bulk" && deleteIds.length > 0) {
+          await supabase.from("cars").delete().in("id", deleteIds);
+          deleteIds.forEach((id) =>
+            carsGrid.querySelector(`[data-id="${id}"]`)?.remove()
+          );
+          deleteIds = [];
+        }
+        confirmOverlay.classList.remove("active");
+        deleteMode = null;
+      };
 
-  deleteSelectedBtn.onclick = () => {
-    document.querySelectorAll(".checkbox").forEach((c) => (c.checked = false));
-  };
+      deleteSelectedBtn.onclick = () => {
+        const checked = [...document.querySelectorAll(".checkbox:checked")];
+        if (checked.length === 0) return;
+        deleteIds  = checked.map((c) => c.closest(".car-card").dataset.id);
+        deleteMode = "bulk";
+        confirmOverlay.classList.add("active");
+      };
 
-  document.getElementById("logout").onclick = async () => {
-    await supabase.auth.signOut();
-    location.href = "/admin";
-  };
-</script> </body> </html>
+      document.getElementById("logout").onclick = async () => {
+        await supabase.auth.signOut();
+        location.href = "/admin";
+      };
+
+      if (session) await loadCars();
+    </script> </body> </html>

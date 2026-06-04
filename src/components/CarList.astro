@@ -1,17 +1,19 @@
 ---
+export const prerender = false;
+
 import { supabase } from "../lib/supabase.js";
 import CarCard from "./CarCard.astro";
 
-const { data: cars, error } = await supabase
+const { limit } = Astro.props;
+
+const query = supabase
   .from("cars")
   .select("*")
   .order("id", { ascending: false });
+if (limit) query.limit(limit);
 
+const { data: cars } = await query;
 const carsToShow = cars ?? [];
-
-if (error) {
-  console.error(error);
-}
 ---
 
 <div class="card-grid">

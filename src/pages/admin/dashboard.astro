@@ -1,13 +1,5 @@
 ---
-import { supabase } from "../../lib/supabase.js";
 import "../../styles/admin-dashboard.css";
-
-const { data: cars } = await supabase
-  .from("cars")
-  .select("*")
-  .order("id", { ascending: false }); // ← alterado aqui
-
-const safeCars = cars ?? [];
 ---
 
 <!doctype html>
@@ -29,28 +21,7 @@ const safeCars = cars ?? [];
         </button>
       </div>
 
-      <div class="cars-grid">
-        {
-          safeCars.map((car) => (
-            <div class="car-card" data-id={car.id}>
-              <input type="checkbox" class="checkbox" />
-              <img src={car.image} class="car-image" />
-              <div class="car-content">
-                <h3>{car.brand}</h3>
-                <p>{car.model}</p>
-                <div class="car-meta">
-                  <span>{car.year}</span>
-                  <span>{car.price}</span>
-                </div>
-                <div class="car-actions">
-                  <button class="edit-btn">✏ Editar</button>
-                  <button class="delete-btn">🗑 Apagar</button>
-                </div>
-              </div>
-            </div>
-          ))
-        }
-      </div>
+      <div class="cars-grid" id="cars-grid"></div>
 
       <button class="fab" id="open-modal">+</button>
 
@@ -58,40 +29,39 @@ const safeCars = cars ?? [];
       <div class="modal" id="modal">
         <div class="modal-content">
           <button class="close-modal" id="close-modal">×</button>
-
           <h2>Carro</h2>
 
-          <label>Nome</label>
+          <label for="brand">Nome</label>
           <input id="brand" />
 
-          <label>Descrição</label>
+          <label for="model">Descrição</label>
           <input id="model" />
 
-          <label>Ano</label>
-          <input id="year" />
-
-          <label>Preço</label>
+          <label for="price">Preço</label>
           <input id="price" />
 
-          <label>Km</label>
+          <label for="year">Ano</label>
+          <input id="year" />
+
+          <label for="km">Km</label>
           <input id="km" />
 
-          <label>Combustível</label>
+          <label for="fuel">Combustível</label>
           <input id="fuel" />
 
-          <label>Caixa</label>
+          <label for="caixa">Caixa</label>
           <input id="caixa" />
 
-          <label>Segmento</label>
-          <input id="segmento" />
-
-          <label>Cilindrada</label>
+          <label for="cilindrada">Cilindrada</label>
           <input id="cilindrada" />
 
-          <label>Potencia</label>
+          <label for="potencia">Potencia</label>
           <input id="potencia" />
 
-          <label>Status</label>
+          <label for="segmento">Segmento</label>
+          <input id="segmento" />
+
+          <label for="status">Status</label>
           <input id="status" placeholder="vendido/reservado/disponivel" />
 
           <input
@@ -105,9 +75,7 @@ const safeCars = cars ?? [];
           <div id="image-manager">
             <h4>Imagens · 1ª é a capa · arrasta ≡ para reordenar</h4>
             <div class="img-list" id="img-list"></div>
-            <button class="add-image-btn" id="add-image-btn"
-              >+ Adicionar Imagens</button
-            >
+            <button class="add-image-btn" id="add-image-btn">+ Adicionar Imagens</button>
           </div>
 
           <button id="save-car">Guardar</button>
@@ -142,52 +110,85 @@ const safeCars = cars ?? [];
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InppeWxjb3Vwc2NoY3VzbmxzYmx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMDAwMjksImV4cCI6MjA5NTc3NjAyOX0.6HdFwkPcwxUTlbKvhr3EoSI1qz3U9e3fCeITLr8eVmY",
       );
 
-      // ── Auth guard ──────────────────────────────────────────────
-      const authGuard = document.getElementById("auth-guard");
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
+      const authGuard         = document.getElementById("auth-guard");
+      const carsGrid          = document.getElementById("cars-grid");
+      const modal             = document.getElementById("modal");
+      const closeModalBtn     = document.getElementById("close-modal");
+      const confirmOverlay    = document.getElementById("confirm-overlay");
+      const confirmYes        = document.getElementById("confirm-yes");
+      const confirmNo         = document.getElementById("confirm-no");
+      const galleryInput      = document.getElementById("galleryImages");
+      const imgList           = document.getElementById("img-list");
+      const addImageBtn       = document.getElementById("add-image-btn");
+      const preview           = document.getElementById("image-preview");
+      const previewImg        = document.getElementById("image-preview-img");
+      const closePreview      = document.getElementById("close-preview");
+      const deleteSelectedBtn = document.getElementById("delete-selected");
+
+      const fields = {
+        brand:      document.getElementById("brand"),
+        model:      document.getElementById("model"),
+        year:       document.getElementById("year"),
+        price:      document.getElementById("price"),
+        km:         document.getElementById("km"),
+        fuel:       document.getElementById("fuel"),
+        caixa:      document.getElementById("caixa"),
+        segmento:   document.getElementById("segmento"),
+        cilindrada: document.getElementById("cilindrada"),
+        potencia:   document.getElementById("potencia"),
+        status:     document.getElementById("status"),
+      };
+
+      let editingId    = null;
+      let deleteId     = null;
+      let deleteMode   = null;
+      let deleteIds    = [];
+      let imageSlots   = [];
+      let dragSrcIndex = null;
+
+      const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         window.location.href = "/admin";
       } else {
         authGuard.style.display = "block";
       }
 
-      // ── State ───────────────────────────────────────────────────
-      let editingId = null;
-      let deleteId = null;
-      let deleteMode = null;
-      let imageSlots = [];
+      async function loadCars() {
+        const { data: cars } = await supabase
+          .from("cars")
+          .select("*")
+          .order("id", { ascending: false });
+        renderCars(cars ?? []);
+      }
 
-      // ── DOM refs ────────────────────────────────────────────────
-      const modal = document.getElementById("modal");
-      const closeModalBtn = document.getElementById("close-modal");
-      const confirmOverlay = document.getElementById("confirm-overlay");
-      const confirmYes = document.getElementById("confirm-yes");
-      const confirmNo = document.getElementById("confirm-no");
-      const galleryInput = document.getElementById("galleryImages");
-      const imgList = document.getElementById("img-list");
-      const addImageBtn = document.getElementById("add-image-btn");
-      const preview = document.getElementById("image-preview");
-      const previewImg = document.getElementById("image-preview-img");
-      const closePreview = document.getElementById("close-preview");
-      const deleteSelectedBtn = document.getElementById("delete-selected");
+      function renderCars(cars) {
+        carsGrid.innerHTML = "";
+        cars.forEach((car) => carsGrid.appendChild(createCarCard(car)));
+      }
 
-      const fields = {
-        brand: document.getElementById("brand"),
-        model: document.getElementById("model"),
-        year: document.getElementById("year"),
-        price: document.getElementById("price"),
-        km: document.getElementById("km"),
-        fuel: document.getElementById("fuel"),
-        caixa: document.getElementById("caixa"),
-        segmento: document.getElementById("segmento"),
-        cilindrada: document.getElementById("cilindrada"),
-        potencia: document.getElementById("potencia"),
-        status: document.getElementById("status"),
-      };
+      function createCarCard(car) {
+        const card = document.createElement("div");
+        card.className = "car-card";
+        card.dataset.id = car.id;
+        card.innerHTML = `
+          <input type="checkbox" class="checkbox" />
+          <img src="${car.image ?? ""}" class="car-image" />
+          <div class="car-content">
+            <h3>${car.brand ?? ""}</h3>
+            <p>${car.model ?? ""}</p>
+            <div class="car-meta">
+              <span>${car.year ?? ""}</span>
+              <span>${car.price ?? ""}</span>
+            </div>
+            <div class="car-actions">
+              <button class="edit-btn">✏ Editar</button>
+              <button class="delete-btn">🗑 Apagar</button>
+            </div>
+          </div>
+        `;
+        return card;
+      }
 
-      // ── Helpers ─────────────────────────────────────────────────
       function clearForm() {
         Object.values(fields).forEach((f) => (f.value = ""));
         galleryInput.value = "";
@@ -203,9 +204,7 @@ const safeCars = cars ?? [];
       closePreview.onclick = () => preview.classList.remove("active");
 
       function slotPreviewUrl(slot) {
-        return slot.type === "existing"
-          ? slot.url
-          : URL.createObjectURL(slot.file);
+        return slot.type === "existing" ? slot.url : URL.createObjectURL(slot.file);
       }
 
       function slotLabel(slot) {
@@ -215,17 +214,13 @@ const safeCars = cars ?? [];
 
       async function uploadFile(file) {
         const path = `${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`;
-        const { error } = await supabase.storage
-          .from("cars")
-          .upload(path, file);
+        const { error } = await supabase.storage.from("cars").upload(path, file);
         if (error) throw error;
         return supabase.storage.from("cars").getPublicUrl(path).data.publicUrl;
       }
 
-      // ── List render ──────────────────────────────────────────────
       function renderList() {
         imgList.innerHTML = "";
-
         imageSlots.forEach((slot, index) => {
           const row = document.createElement("div");
           row.className = "img-row" + (index === 0 ? " is-cover" : "");
@@ -265,38 +260,29 @@ const safeCars = cars ?? [];
           row.appendChild(name);
           row.appendChild(removeBtn);
 
-          handle.addEventListener("mousedown", () => {
-            row.draggable = true;
-          });
-          row.addEventListener("dragstart", onDragStart);
-          row.addEventListener("dragover", onDragOver);
-          row.addEventListener("dragleave", onDragLeave);
-          row.addEventListener("drop", onDrop);
-          row.addEventListener("dragend", onDragEnd);
+          row.addEventListener("dragstart",  onDragStart);
+          row.addEventListener("dragover",   onDragOver);
+          row.addEventListener("dragleave",  onDragLeave);
+          row.addEventListener("drop",       onDrop);
+          row.addEventListener("dragend",    onDragEnd);
 
           imgList.appendChild(row);
         });
       }
-
-      // ── Drag-and-drop ────────────────────────────────────────────
-      let dragSrcIndex = null;
 
       function onDragStart(e) {
         dragSrcIndex = parseInt(this.dataset.index);
         this.classList.add("dragging");
         e.dataTransfer.effectAllowed = "move";
       }
-
       function onDragOver(e) {
         e.preventDefault();
         e.dataTransfer.dropEffect = "move";
         this.classList.add("drag-over");
       }
-
       function onDragLeave() {
         this.classList.remove("drag-over");
       }
-
       function onDrop(e) {
         e.preventDefault();
         this.classList.remove("drag-over");
@@ -306,35 +292,28 @@ const safeCars = cars ?? [];
         imageSlots.splice(targetIndex, 0, moved);
         renderList();
       }
-
       function onDragEnd() {
         dragSrcIndex = null;
-        imgList.querySelectorAll(".img-row").forEach((el) => {
-          el.classList.remove("dragging", "drag-over");
-        });
+        imgList.querySelectorAll(".img-row").forEach((el) =>
+          el.classList.remove("dragging", "drag-over")
+        );
       }
 
-      // ── Adicionar imagens ────────────────────────────────────────
       addImageBtn.onclick = () => galleryInput.click();
-
       galleryInput.addEventListener("change", (e) => {
         const files = Array.from(e.target.files);
         const available = 15 - imageSlots.length;
-        files.slice(0, available).forEach((file) => {
-          imageSlots.push({ type: "new", file });
-        });
+        files.slice(0, available).forEach((file) =>
+          imageSlots.push({ type: "new", file })
+        );
         renderList();
         galleryInput.value = "";
       });
 
-      // ── Modal open/close ─────────────────────────────────────────
       function openModal() {
-        document
-          .querySelectorAll(".checkbox")
-          .forEach((c) => (c.checked = false));
+        document.querySelectorAll(".checkbox").forEach((c) => (c.checked = false));
         modal.classList.add("active");
       }
-
       function closeModal() {
         modal.classList.remove("active");
         clearForm();
@@ -345,43 +324,27 @@ const safeCars = cars ?? [];
         clearForm();
         openModal();
       };
-
       closeModalBtn.onclick = closeModal;
-      modal.onclick = (e) => {
-        if (e.target === modal) closeModal();
-      };
+      modal.onclick = (e) => { if (e.target === modal) closeModal(); };
 
-      // ── Edit btn ─────────────────────────────────────────────────
-      document.addEventListener("click", async (e) => {
+      carsGrid.addEventListener("click", async (e) => {
         const card = e.target.closest(".car-card");
         if (!card) return;
-
         const id = card.dataset.id;
 
         if (e.target.classList.contains("edit-btn")) {
           const { data } = await supabase
-            .from("cars")
-            .select("*")
-            .eq("id", id)
-            .maybeSingle();
-
+            .from("cars").select("*").eq("id", id).maybeSingle();
           if (!data) return;
 
           editingId = id;
-          Object.keys(fields).forEach((k) => {
-            fields[k].value = data[k] ?? "";
-          });
+          Object.keys(fields).forEach((k) => { fields[k].value = data[k] ?? ""; });
 
           imageSlots = [];
-
           if (data.images && data.images.length > 0) {
-            data.images.forEach((url) => {
-              imageSlots.push({ type: "existing", url });
-            });
+            data.images.forEach((url) => imageSlots.push({ type: "existing", url }));
             if (data.image) {
-              const coverIdx = imageSlots.findIndex(
-                (s) => s.url === data.image,
-              );
+              const coverIdx = imageSlots.findIndex((s) => s.url === data.image);
               if (coverIdx > 0) {
                 const [coverSlot] = imageSlots.splice(coverIdx, 1);
                 imageSlots.unshift(coverSlot);
@@ -398,58 +361,87 @@ const safeCars = cars ?? [];
         }
 
         if (e.target.classList.contains("delete-btn")) {
-          deleteId = id;
+          deleteId   = id;
           deleteMode = "single";
           confirmOverlay.classList.add("active");
         }
       });
 
-      // ── Save ─────────────────────────────────────────────────────
       document.getElementById("save-car").onclick = async () => {
-        const payload = {};
-        Object.keys(fields).forEach((k) => {
-          payload[k] = fields[k].value;
-        });
+        const saveBtn = document.getElementById("save-car");
+        saveBtn.disabled = true;
+        saveBtn.textContent = "A guardar...";
 
-        const resolvedUrls = await Promise.all(
-          imageSlots.map((slot) =>
-            slot.type === "existing"
-              ? Promise.resolve(slot.url)
-              : uploadFile(slot.file),
-          ),
-        );
+        try {
+          const payload = {};
+          Object.keys(fields).forEach((k) => { payload[k] = fields[k].value; });
 
-        payload.images = resolvedUrls;
-        payload.image = resolvedUrls[0] ?? "";
+          const resolvedUrls = await Promise.all(
+            imageSlots.map((slot) =>
+              slot.type === "existing"
+                ? Promise.resolve(slot.url)
+                : uploadFile(slot.file)
+            )
+          );
 
-        if (editingId) {
-          await supabase.from("cars").update(payload).eq("id", editingId);
-        } else {
-          await supabase.from("cars").insert([payload]);
+          payload.images = resolvedUrls;
+          payload.image  = resolvedUrls[0] ?? "";
+
+          if (editingId) {
+            const { data: updated } = await supabase
+              .from("cars").update(payload).eq("id", editingId).select().maybeSingle();
+            if (updated) {
+              const existingCard = carsGrid.querySelector(`[data-id="${editingId}"]`);
+              if (existingCard) existingCard.replaceWith(createCarCard(updated));
+            }
+          } else {
+            const { data: inserted } = await supabase
+              .from("cars").insert([payload]).select().maybeSingle();
+            if (inserted) carsGrid.prepend(createCarCard(inserted));
+          }
+
+          closeModal();
+        } catch (err) {
+          console.error("Erro ao guardar:", err);
+          alert("Erro ao guardar. Verifica a consola.");
+        } finally {
+          saveBtn.disabled = false;
+          saveBtn.textContent = "Guardar";
         }
-
-        location.reload();
       };
 
-      // ── Confirm delete ───────────────────────────────────────────
-      confirmNo.onclick = () => confirmOverlay.classList.remove("active");
+      confirmNo.onclick  = () => confirmOverlay.classList.remove("active");
       confirmYes.onclick = async () => {
-        if (deleteMode === "single") {
+        if (deleteMode === "single" && deleteId) {
           await supabase.from("cars").delete().eq("id", deleteId);
+          carsGrid.querySelector(`[data-id="${deleteId}"]`)?.remove();
+          deleteId = null;
         }
-        location.reload();
+        if (deleteMode === "bulk" && deleteIds.length > 0) {
+          await supabase.from("cars").delete().in("id", deleteIds);
+          deleteIds.forEach((id) =>
+            carsGrid.querySelector(`[data-id="${id}"]`)?.remove()
+          );
+          deleteIds = [];
+        }
+        confirmOverlay.classList.remove("active");
+        deleteMode = null;
       };
 
       deleteSelectedBtn.onclick = () => {
-        document
-          .querySelectorAll(".checkbox")
-          .forEach((c) => (c.checked = false));
+        const checked = [...document.querySelectorAll(".checkbox:checked")];
+        if (checked.length === 0) return;
+        deleteIds  = checked.map((c) => c.closest(".car-card").dataset.id);
+        deleteMode = "bulk";
+        confirmOverlay.classList.add("active");
       };
 
       document.getElementById("logout").onclick = async () => {
         await supabase.auth.signOut();
         location.href = "/admin";
       };
+
+      if (session) await loadCars();
     </script>
   </body>
 </html>

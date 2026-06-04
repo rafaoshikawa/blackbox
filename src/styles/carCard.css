@@ -142,11 +142,12 @@
     color: #aaa;
   }
 
-  .price strong {
-    font-size: 20px;
-    font-size: 2rem;
-    color: #ffd400;
-  }
+ .price strong {
+  font-size: 20px;
+  font-size: 2rem;
+  color: #ffd400 !important;
+  -webkit-text-fill-color: #ffd400;
+}
 
   .card-grid{
    display: flex;
