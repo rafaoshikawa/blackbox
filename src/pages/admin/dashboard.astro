@@ -6,6 +6,7 @@ import "../../styles/admin-dashboard.css";
 <html lang="pt">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
   </head>
 
@@ -75,7 +76,9 @@ import "../../styles/admin-dashboard.css";
           <div id="image-manager">
             <h4>Imagens · 1ª é a capa · arrasta ≡ para reordenar</h4>
             <div class="img-list" id="img-list"></div>
-            <button class="add-image-btn" id="add-image-btn">+ Adicionar Imagens</button>
+            <button class="add-image-btn" id="add-image-btn"
+              >+ Adicionar Imagens</button
+            >
           </div>
 
           <button id="save-car">Guardar</button>
@@ -110,43 +113,45 @@ import "../../styles/admin-dashboard.css";
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InppeWxjb3Vwc2NoY3VzbmxzYmx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMDAwMjksImV4cCI6MjA5NTc3NjAyOX0.6HdFwkPcwxUTlbKvhr3EoSI1qz3U9e3fCeITLr8eVmY",
       );
 
-      const authGuard         = document.getElementById("auth-guard");
-      const carsGrid          = document.getElementById("cars-grid");
-      const modal             = document.getElementById("modal");
-      const closeModalBtn     = document.getElementById("close-modal");
-      const confirmOverlay    = document.getElementById("confirm-overlay");
-      const confirmYes        = document.getElementById("confirm-yes");
-      const confirmNo         = document.getElementById("confirm-no");
-      const galleryInput      = document.getElementById("galleryImages");
-      const imgList           = document.getElementById("img-list");
-      const addImageBtn       = document.getElementById("add-image-btn");
-      const preview           = document.getElementById("image-preview");
-      const previewImg        = document.getElementById("image-preview-img");
-      const closePreview      = document.getElementById("close-preview");
+      const authGuard = document.getElementById("auth-guard");
+      const carsGrid = document.getElementById("cars-grid");
+      const modal = document.getElementById("modal");
+      const closeModalBtn = document.getElementById("close-modal");
+      const confirmOverlay = document.getElementById("confirm-overlay");
+      const confirmYes = document.getElementById("confirm-yes");
+      const confirmNo = document.getElementById("confirm-no");
+      const galleryInput = document.getElementById("galleryImages");
+      const imgList = document.getElementById("img-list");
+      const addImageBtn = document.getElementById("add-image-btn");
+      const preview = document.getElementById("image-preview");
+      const previewImg = document.getElementById("image-preview-img");
+      const closePreview = document.getElementById("close-preview");
       const deleteSelectedBtn = document.getElementById("delete-selected");
 
       const fields = {
-        brand:      document.getElementById("brand"),
-        model:      document.getElementById("model"),
-        year:       document.getElementById("year"),
-        price:      document.getElementById("price"),
-        km:         document.getElementById("km"),
-        fuel:       document.getElementById("fuel"),
-        caixa:      document.getElementById("caixa"),
-        segmento:   document.getElementById("segmento"),
+        brand: document.getElementById("brand"),
+        model: document.getElementById("model"),
+        year: document.getElementById("year"),
+        price: document.getElementById("price"),
+        km: document.getElementById("km"),
+        fuel: document.getElementById("fuel"),
+        caixa: document.getElementById("caixa"),
+        segmento: document.getElementById("segmento"),
         cilindrada: document.getElementById("cilindrada"),
-        potencia:   document.getElementById("potencia"),
-        status:     document.getElementById("status"),
+        potencia: document.getElementById("potencia"),
+        status: document.getElementById("status"),
       };
 
-      let editingId    = null;
-      let deleteId     = null;
-      let deleteMode   = null;
-      let deleteIds    = [];
-      let imageSlots   = [];
+      let editingId = null;
+      let deleteId = null;
+      let deleteMode = null;
+      let deleteIds = [];
+      let imageSlots = [];
       let dragSrcIndex = null;
 
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       if (!session) {
         window.location.href = "/admin";
       } else {
@@ -204,7 +209,9 @@ import "../../styles/admin-dashboard.css";
       closePreview.onclick = () => preview.classList.remove("active");
 
       function slotPreviewUrl(slot) {
-        return slot.type === "existing" ? slot.url : URL.createObjectURL(slot.file);
+        return slot.type === "existing"
+          ? slot.url
+          : URL.createObjectURL(slot.file);
       }
 
       function slotLabel(slot) {
@@ -214,7 +221,9 @@ import "../../styles/admin-dashboard.css";
 
       async function uploadFile(file) {
         const path = `${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`;
-        const { error } = await supabase.storage.from("cars").upload(path, file);
+        const { error } = await supabase.storage
+          .from("cars")
+          .upload(path, file);
         if (error) throw error;
         return supabase.storage.from("cars").getPublicUrl(path).data.publicUrl;
       }
@@ -260,11 +269,11 @@ import "../../styles/admin-dashboard.css";
           row.appendChild(name);
           row.appendChild(removeBtn);
 
-          row.addEventListener("dragstart",  onDragStart);
-          row.addEventListener("dragover",   onDragOver);
-          row.addEventListener("dragleave",  onDragLeave);
-          row.addEventListener("drop",       onDrop);
-          row.addEventListener("dragend",    onDragEnd);
+          row.addEventListener("dragstart", onDragStart);
+          row.addEventListener("dragover", onDragOver);
+          row.addEventListener("dragleave", onDragLeave);
+          row.addEventListener("drop", onDrop);
+          row.addEventListener("dragend", onDragEnd);
 
           imgList.appendChild(row);
         });
@@ -294,24 +303,26 @@ import "../../styles/admin-dashboard.css";
       }
       function onDragEnd() {
         dragSrcIndex = null;
-        imgList.querySelectorAll(".img-row").forEach((el) =>
-          el.classList.remove("dragging", "drag-over")
-        );
+        imgList
+          .querySelectorAll(".img-row")
+          .forEach((el) => el.classList.remove("dragging", "drag-over"));
       }
 
       addImageBtn.onclick = () => galleryInput.click();
       galleryInput.addEventListener("change", (e) => {
         const files = Array.from(e.target.files);
         const available = 15 - imageSlots.length;
-        files.slice(0, available).forEach((file) =>
-          imageSlots.push({ type: "new", file })
-        );
+        files
+          .slice(0, available)
+          .forEach((file) => imageSlots.push({ type: "new", file }));
         renderList();
         galleryInput.value = "";
       });
 
       function openModal() {
-        document.querySelectorAll(".checkbox").forEach((c) => (c.checked = false));
+        document
+          .querySelectorAll(".checkbox")
+          .forEach((c) => (c.checked = false));
         modal.classList.add("active");
       }
       function closeModal() {
@@ -325,7 +336,9 @@ import "../../styles/admin-dashboard.css";
         openModal();
       };
       closeModalBtn.onclick = closeModal;
-      modal.onclick = (e) => { if (e.target === modal) closeModal(); };
+      modal.onclick = (e) => {
+        if (e.target === modal) closeModal();
+      };
 
       carsGrid.addEventListener("click", async (e) => {
         const card = e.target.closest(".car-card");
@@ -334,17 +347,26 @@ import "../../styles/admin-dashboard.css";
 
         if (e.target.classList.contains("edit-btn")) {
           const { data } = await supabase
-            .from("cars").select("*").eq("id", id).maybeSingle();
+            .from("cars")
+            .select("*")
+            .eq("id", id)
+            .maybeSingle();
           if (!data) return;
 
           editingId = id;
-          Object.keys(fields).forEach((k) => { fields[k].value = data[k] ?? ""; });
+          Object.keys(fields).forEach((k) => {
+            fields[k].value = data[k] ?? "";
+          });
 
           imageSlots = [];
           if (data.images && data.images.length > 0) {
-            data.images.forEach((url) => imageSlots.push({ type: "existing", url }));
+            data.images.forEach((url) =>
+              imageSlots.push({ type: "existing", url }),
+            );
             if (data.image) {
-              const coverIdx = imageSlots.findIndex((s) => s.url === data.image);
+              const coverIdx = imageSlots.findIndex(
+                (s) => s.url === data.image,
+              );
               if (coverIdx > 0) {
                 const [coverSlot] = imageSlots.splice(coverIdx, 1);
                 imageSlots.unshift(coverSlot);
@@ -361,7 +383,7 @@ import "../../styles/admin-dashboard.css";
         }
 
         if (e.target.classList.contains("delete-btn")) {
-          deleteId   = id;
+          deleteId = id;
           deleteMode = "single";
           confirmOverlay.classList.add("active");
         }
@@ -374,29 +396,41 @@ import "../../styles/admin-dashboard.css";
 
         try {
           const payload = {};
-          Object.keys(fields).forEach((k) => { payload[k] = fields[k].value; });
+          Object.keys(fields).forEach((k) => {
+            payload[k] = fields[k].value;
+          });
 
           const resolvedUrls = await Promise.all(
             imageSlots.map((slot) =>
               slot.type === "existing"
                 ? Promise.resolve(slot.url)
-                : uploadFile(slot.file)
-            )
+                : uploadFile(slot.file),
+            ),
           );
 
           payload.images = resolvedUrls;
-          payload.image  = resolvedUrls[0] ?? "";
+          payload.image = resolvedUrls[0] ?? "";
 
           if (editingId) {
             const { data: updated } = await supabase
-              .from("cars").update(payload).eq("id", editingId).select().maybeSingle();
+              .from("cars")
+              .update(payload)
+              .eq("id", editingId)
+              .select()
+              .maybeSingle();
             if (updated) {
-              const existingCard = carsGrid.querySelector(`[data-id="${editingId}"]`);
-              if (existingCard) existingCard.replaceWith(createCarCard(updated));
+              const existingCard = carsGrid.querySelector(
+                `[data-id="${editingId}"]`,
+              );
+              if (existingCard)
+                existingCard.replaceWith(createCarCard(updated));
             }
           } else {
             const { data: inserted } = await supabase
-              .from("cars").insert([payload]).select().maybeSingle();
+              .from("cars")
+              .insert([payload])
+              .select()
+              .maybeSingle();
             if (inserted) carsGrid.prepend(createCarCard(inserted));
           }
 
@@ -410,7 +444,7 @@ import "../../styles/admin-dashboard.css";
         }
       };
 
-      confirmNo.onclick  = () => confirmOverlay.classList.remove("active");
+      confirmNo.onclick = () => confirmOverlay.classList.remove("active");
       confirmYes.onclick = async () => {
         if (deleteMode === "single" && deleteId) {
           await supabase.from("cars").delete().eq("id", deleteId);
@@ -420,7 +454,7 @@ import "../../styles/admin-dashboard.css";
         if (deleteMode === "bulk" && deleteIds.length > 0) {
           await supabase.from("cars").delete().in("id", deleteIds);
           deleteIds.forEach((id) =>
-            carsGrid.querySelector(`[data-id="${id}"]`)?.remove()
+            carsGrid.querySelector(`[data-id="${id}"]`)?.remove(),
           );
           deleteIds = [];
         }
@@ -431,7 +465,7 @@ import "../../styles/admin-dashboard.css";
       deleteSelectedBtn.onclick = () => {
         const checked = [...document.querySelectorAll(".checkbox:checked")];
         if (checked.length === 0) return;
-        deleteIds  = checked.map((c) => c.closest(".car-card").dataset.id);
+        deleteIds = checked.map((c) => c.closest(".car-card").dataset.id);
         deleteMode = "bulk";
         confirmOverlay.classList.add("active");
       };
